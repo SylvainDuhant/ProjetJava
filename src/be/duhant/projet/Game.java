@@ -17,7 +17,7 @@ public class Game {
 	public String getName() {
 		return name;
 	}
-	public String geDevelopers() {
+	public String getDevelopers() {
 		return developers;
 	}
 	public String getEditor() {
