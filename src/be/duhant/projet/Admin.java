@@ -3,8 +3,8 @@ package be.duhant.projet;
 import java.util.Date;
 
 public class Admin extends User{
-	public Admin(String login,  Date birthday, String email, String address) {
-		super(login, birthday, email,address);
+	public Admin(int id, String password,String login, String email, String address, Date birthday ) {
+		super(id,password,login, email ,address ,birthday);
 	}
 	public void AddGame() {
 		//DAO

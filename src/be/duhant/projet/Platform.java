@@ -5,7 +5,9 @@ import java.util.Date;
 public class Platform {
 	private String platformName;
 	private Date releaseDate;
-	public Platform(String platformName, Date releaseDate) {
+	private int ID;
+	public Platform(int ID, String platformName, Date releaseDate) {
+		this.ID = ID;
 		this.platformName = platformName;
 		this.releaseDate = releaseDate;
 	}
@@ -14,5 +16,8 @@ public class Platform {
 	}
 	public Date getReleaseDate() {
 		return releaseDate;
+	}
+	public int getID() {
+		return ID;
 	}
 }

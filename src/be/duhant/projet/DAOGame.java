@@ -16,13 +16,14 @@ public class DAOGame extends DAO<Game> {
 		try {
 			Game ga;
 			String sql = "SELECT namee, developers, editor, price, id_console FROM game WHERE id_game ="+ ID;
+			DAOPlatform dao = new DAOPlatform();
 			Statement stmt = super.connection();
 			if (stmt != null) {
 				ResultSet resultat = stmt.executeQuery(sql);
 				
 				boolean tmp = resultat.next();
 				if(resultat.next()) {
-					ga = new Game(resultat.getString(0),resultat.getString(1),resultat.getString(2),resultat.getInt(3), null);// DAOPlatform.getPlatformByID(resultat.getInt(4)));
+					ga = new Game(resultat.getString(0),resultat.getString(1),resultat.getString(2),resultat.getInt(3),dao.Find(resultat.getInt(4)));
 					return ga;
 				}
 				System.out.println("Requête vide" + " " + tmp);
@@ -38,8 +39,17 @@ public class DAOGame extends DAO<Game> {
 
 	@Override
 	public boolean add(Game obj) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			int id = getID()+1;
+			String sql = "insert into GAME (id_game,id_console,price,namee,developers,editor) VALUES ("+ id + ","+ obj.getPlat().getID()+"," + obj.getUnit() +"," + obj.getName() + ","+ obj.getDevelopers() +"," +obj.getEditor() +")";
+			Statement stmt = super.connection();
+			stmt.executeQuery(sql);
+			return true;
+		}
+		catch(Exception err) {
+			System.out.println(err);
+			return false;
+		}
 	}
 
 	@Override

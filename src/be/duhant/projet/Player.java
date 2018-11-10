@@ -4,9 +4,21 @@ import java.util.Date;
 
 public class Player extends User {
 	private int unit;
+	public int getUnit() {
+		return unit;
+	}
+	public void setUnit(int unit) {
+		this.unit = unit;
+	}
+	public Date getRegisterDate() {
+		return registerDate;
+	}
+	public void setRegisterDate(Date registerDate) {
+		this.registerDate = registerDate;
+	}
 	private Date registerDate;
-	public Player(String login,  Date birthday, String email, String address, int unit, Date registerDate ) {
-		super(login, birthday, email,address);
+	public Player(int id, String password,String login, String email, String address, Date birthday, int unit, Date registerDate ) {
+		super(id,password,login, email ,address ,birthday);
 		this.unit = unit;
 		this.registerDate = registerDate;
 	}

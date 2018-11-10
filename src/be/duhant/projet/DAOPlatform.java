@@ -8,11 +8,11 @@ public class DAOPlatform extends DAO<Platform>{
 	public Platform Find(int ID) {
 		try {
 			Platform plat;
-			String sql = "SELECT name, release_date FROM console WHERE id_console = "+ ID;
+			String sql = "SELECT id_console, name, release_date FROM console WHERE id_console = "+ ID;
 		    Statement stmt = super.connection();
 			ResultSet resultat = stmt.executeQuery(sql);
 			if(resultat.next()) {
-				plat = new Platform(resultat.getString(1), resultat.getDate(2));
+				plat = new Platform(resultat.getInt(1),resultat.getString(2), resultat.getDate(3));
 				return plat;
 			}
 			return null;
@@ -25,10 +25,11 @@ public class DAOPlatform extends DAO<Platform>{
 
 	@Override
 	public boolean add(Platform obj) {
-		String sql = "";
+		int maxid = getID();
+		String sql = "INSERT INTO CONSOLE (ID_CONSOLE,NAME,RELEASE_DATE) VALUES ("+ (maxid+1) + "," + obj.getplatformName() + "," + obj.getReleaseDate();
 		try {
 			Statement stmt = super.connection();
-			ResultSet resultat = stmt.executeQuery(sql);
+			stmt.executeQuery(sql);
 			return true;
 		}
 		catch(Exception err) {
