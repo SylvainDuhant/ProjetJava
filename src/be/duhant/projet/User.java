@@ -7,7 +7,6 @@ public abstract class User {
 	private String login;
 	private Date birthday;
 	private String email;
-	//manque liste de jeux
 	private String password;
 	private String address;
 	

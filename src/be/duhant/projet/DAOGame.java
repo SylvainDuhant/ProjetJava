@@ -15,15 +15,15 @@ public class DAOGame extends DAO<Game> {
 	public Game Find(int ID) {
 		try {
 			Game ga;
-			String sql = "SELECT namee, developers, editor, price, id_console FROM game WHERE id_game ="+ ID;
+			String sql = "SELECT * FROM game WHERE id_game ="+ ID;
 			DAOPlatform dao = new DAOPlatform();
 			Statement stmt = super.connection();
 			if (stmt != null) {
 				ResultSet resultat = stmt.executeQuery(sql);
-				
 				boolean tmp = resultat.next();
 				if(resultat.next()) {
-					ga = new Game(resultat.getString(0),resultat.getString(1),resultat.getString(2),resultat.getInt(3),dao.Find(resultat.getInt(4)));
+					Platform plat = dao.Find(resultat.getInt(2));
+					ga = new Game(resultat.getInt(1),plat,resultat.getInt(3),resultat.getString(4),resultat.getString(5),resultat.getString(6));
 					return ga;
 				}
 				System.out.println("Requête vide" + " " + tmp);

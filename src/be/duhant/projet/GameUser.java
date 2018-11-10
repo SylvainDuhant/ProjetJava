@@ -6,6 +6,11 @@ import java.util.Date;
 		private Game ga;
 		private Date disponibilityDate;
 	
+	public GameUser(Game ga, Date d) {
+		this.ga = ga;
+		disponibilityDate = d;
+	}
+	
 	public Game getGame() {
 		return ga;
 	}
