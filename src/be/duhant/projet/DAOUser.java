@@ -75,5 +75,23 @@ public class DAOUser extends DAO<User>{
 		}
 		
 	}
+	
+	public int connect(String login, String password) {
+		Statement stmt = super.connection();
+		String sql = "SELECT id_util from util where login = '"+ login + "' AND password = '"+password+"'";
+		try {
+			ResultSet res = stmt.executeQuery(sql);
+			if(res.next()) {
+				return res.getInt(1);
+			}
+			else {
+				return -1;
+			}
+		}
+		catch(Exception err) {
+			JOptionPane.showMessageDialog(null,err.getMessage());
+			return -2;
+		}
+	}
 
 }
