@@ -11,7 +11,7 @@ public class DAOUser extends DAO<User>{
 	public User Find(int id) {
 		Statement stmt = super.connection();
 		User u;
-		String sql = "SELECT * FROM admini where id_util = " + id;
+		String sql = "SELECT * FROM util u inner join admini a on u.id_util = a.id_util where a.id_util = " + id;
 		try {
 			ResultSet res = stmt.executeQuery(sql);
 			if(res.next()) {

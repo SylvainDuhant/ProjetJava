@@ -10,6 +10,8 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -72,6 +74,12 @@ public class FrameConnexion extends JFrame {
 				if(rep != -1 && rep != -2) {
 					//connecté
 					lblMessage.setText("Vous êtes connecté !");
+					User u = dao.Find(rep);
+					if(u instanceof Admin) {
+						FrameAdmin fa = new FrameAdmin((Admin) u);
+						fa.setVisible(true);
+						dispose();
+					}
 				}
 				else if(rep == -1) {
 					//pas connecté
@@ -87,7 +95,7 @@ public class FrameConnexion extends JFrame {
 		contentPane.add(btnConnexion);
 		
 		JLabel lblVousNtesPlus = new JLabel("Vous n'\u00EAtes plus qu'a un click de partager vos jeux ! ");
-		lblVousNtesPlus.setBounds(105, 30, 258, 14);
+		lblVousNtesPlus.setBounds(42, 30, 382, 14);
 		contentPane.add(lblVousNtesPlus);
 	}
 }
