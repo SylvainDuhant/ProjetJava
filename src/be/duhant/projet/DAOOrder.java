@@ -30,13 +30,43 @@ public class DAOOrder extends DAO<Order>{
 
 	@Override
 	public boolean add(Order obj) {
-		// TODO Auto-generated method stub
-		return false;
+		String sql;
+		Statement stmt = super.connection();
+		int id = getID()+1;
+		try {
+			sql = "insert into ordr values ("+id +","+obj.getPl().getID()+","+obj.getGa().getID()+","+ obj.getRegisterDate()+","+obj.getBeginDate()+","+obj.getEndDate()+","+obj.getAccepted() +")";
+			stmt.executeQuery(sql);
+			return true;
+		}
+		catch(Exception err) {
+			JOptionPane.showMessageDialog(null,err.getMessage());
+			return false;
+		}
+		
 	}
 
 	@Override
 	public Order Find(int id) {
-		return null;
+		String sql;
+		Statement stmt = super.connection();
+		try {
+			sql = "select * from ordr where id_ordr = "+ id + ")";
+			ResultSet res = stmt.executeQuery(sql);
+			if(res.next()) {
+				DAOUser daoP = new DAOUser();
+				DAOGame daoG = new DAOGame();
+				Player pa = (Player) daoP.Find(res.getInt(2));
+				Game ga = daoG.Find(res.getInt(3));
+				Order od = new Order(pa,ga,res.getDate(4),res.getDate(5),res.getDate(6),res.getInt(7) == 1); //pas de boolean dans sql developper 
+				return od;
+			}	
+			return null;
+		}
+		catch(Exception err) {
+			JOptionPane.showMessageDialog(null,err.getMessage());
+			return null;
+		}
+		
 	}
 
 }

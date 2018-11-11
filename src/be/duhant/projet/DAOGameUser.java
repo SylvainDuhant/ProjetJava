@@ -3,7 +3,9 @@ package be.duhant.projet;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -18,9 +20,11 @@ public class DAOGameUser extends DAO<GameUser>{
 			sql = "select * from game_copy where ig_copy = " + id +")";
 			ResultSet res = stmt.executeQuery(sql);
 			if(res.next()) {
-				DAOGame dao = new DAOGame();
-				Game ga = dao.Find(res.getInt(2));
-				gu = new GameUser(ga,res.getDate(3));
+				DAOGame daoG = new DAOGame();
+				Game ga = daoG.Find(res.getInt(2));
+				DAOUser daoP = new DAOUser();
+				Player pl = (Player) daoP.Find(res.getInt(3));
+				gu = new GameUser(ga,pl,res.getDate(4));
 				return gu;
 			}
 			JOptionPane.showMessageDialog(null,"l'exemplaire recherché n'existe pas");
@@ -70,6 +74,28 @@ public class DAOGameUser extends DAO<GameUser>{
 		catch(Exception err){
 			System.out.println(err);
 			return -1;
+		}
+	}
+	public List<GameUser> getAllGameUSer(){
+		List<GameUser> li = new ArrayList<GameUser>();
+		try {
+			DAOGame daoG = new DAOGame();
+			Game ga;
+			DAOUser daoP = new DAOUser();
+			Player pl;
+			Statement stmt = super.connection();
+			String sql = "select * from game_copy";
+			ResultSet res = stmt.executeQuery(sql);
+			while(res.next()) {
+				ga = daoG.Find(res.getInt(2));
+				pl = (Player) daoP.Find(res.getInt(3));
+				li.add(new GameUser(ga,pl,res.getDate(4)));
+			}
+			return li;
+		}
+		catch(Exception err) {
+			JOptionPane.showMessageDialog(null,err.getMessage());
+			return null;
 		}
 	}
 

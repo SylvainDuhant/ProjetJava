@@ -3,11 +3,18 @@ package be.duhant.projet;
 import java.util.List;
 
 public class Catalog {
-	private List<GameUser> listGame;
-	public Catalog(List<GameUser> listGame) {
-		this.listGame = listGame;
+	private List<GameUser> listGameUser;
+	private List<Game> listGame;
+	public Catalog() {
+		DAOGame daoG = new DAOGame();
+		DAOGameUser daoGU = new DAOGameUser();
+		listGameUser = daoGU.getAllGameUSer();
+		listGame = daoG.getAllGames();
 	}
-	public List<GameUser> getListGame(){
+	public List<Game> getListGame(){
 		return listGame;
+	}
+	public List<GameUser> getListGameUser(){
+		return listGameUser;
 	}
 }

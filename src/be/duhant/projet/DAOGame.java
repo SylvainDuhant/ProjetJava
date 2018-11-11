@@ -2,6 +2,10 @@ package be.duhant.projet;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JOptionPane;
 
 public class DAOGame extends DAO<Game> {
 	
@@ -32,7 +36,6 @@ public class DAOGame extends DAO<Game> {
 			return null;
 		}
 		catch(Exception err){
-			System.out.println(err);
 			return null;
 		}
 	}
@@ -47,7 +50,7 @@ public class DAOGame extends DAO<Game> {
 			return true;
 		}
 		catch(Exception err) {
-			System.out.println(err);
+			JOptionPane.showMessageDialog(null,err.getMessage());
 			return false;
 		}
 	}
@@ -69,8 +72,27 @@ public class DAOGame extends DAO<Game> {
 			return -1;
 		}
 		catch(Exception err){
-			System.out.println(err);
+			JOptionPane.showMessageDialog(null,err.getMessage());
 			return -1;
+		}
+	}
+	public List<Game> getAllGames(){
+		List<Game> list = new ArrayList<Game>();
+		try {
+			Statement stmt = super.connection();
+			String sql = "select * from game";
+			ResultSet res = stmt.executeQuery(sql);
+			Platform plat;
+			DAOPlatform dao = new DAOPlatform();
+			while(res.next()) {
+				plat = dao.Find(res.getInt(2));
+				list.add(new Game(res.getInt(1),plat,res.getInt(3),res.getString(4),res.getString(5),res.getString(6)));
+			}
+			return list;
+		}
+		catch(Exception err){
+			System.out.println(err);
+			return null;
 		}
 	}
 }

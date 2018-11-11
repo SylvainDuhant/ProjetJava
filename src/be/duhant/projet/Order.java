@@ -7,13 +7,38 @@ public class Order {
 	Date beginDate;
 	Date endDate;
 	Boolean accepted;
-	GameUser gu;
+	Game ga;
+	Player pl;
 	
-	public Order(Date registerDate, Date beginDate, Date endDate, Boolean accepted, GameUser gu) {
+	public Order(Player pl, Game ga, Date registerDate, Date beginDate, Date endDate, Boolean accepted) {
+		this.pl = pl;
 		this.registerDate = registerDate;
 		this.beginDate = beginDate;
 		this.endDate = endDate;
 		this.accepted = accepted;
-		this.gu = gu;
+		this.ga = ga;
+	}
+	public Date getRegisterDate() {
+		return registerDate;
+	}
+
+	public Date getBeginDate() {
+		return beginDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public Boolean getAccepted() {
+		return accepted;
+	}
+
+	public Game getGa() {
+		return ga;
+	}
+
+	public Player getPl() {
+		return pl;
 	}
 }
