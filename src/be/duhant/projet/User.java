@@ -34,6 +34,9 @@ public abstract class User {
 	public int getID() {
 		return id;
 	}
+	public void SetID(int id) {
+		this.id = id;
+	}
 
 	public String getPassword() {
 		return password;

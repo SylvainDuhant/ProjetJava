@@ -14,6 +14,7 @@ import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 
 public class FrameInscription extends JFrame {
@@ -24,7 +25,6 @@ public class FrameInscription extends JFrame {
 	private JPasswordField PFConfPassword;
 	private JTextField TFEmail;
 	private JTextField TGAdresse;
-
 	/**
 	 * Launch the application.
 	 */
@@ -119,12 +119,27 @@ public class FrameInscription extends JFrame {
 		JButton btnInscription = new JButton("Inscription");
 		btnInscription.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(PFPassword.getText() != PFConfPassword.getText()) {
-					lblError.setText("Les mots de passes ne correspondent pas !");
+				if(!PFPassword.getText().equals(PFConfPassword.getText())) {
+					lblError.setText("Les mots de passes ne correspondent pas !");					
 				}
+				else {
+					DAOUser dao = new DAOUser();
+					Player pl = new Player(-1, PFPassword.getText() ,TFLogin.getText(), TFEmail.getText(), TGAdresse.getText(), DPBirthday.getDate() , 10, new Date());
+					int res = dao.add(pl);
+					if(res > 0) {
+						pl.SetID(res);
+					}
+					else if(res == -1) {
+						lblError.setText("Le login est déjà utilisé");
+					}
+					else {
+						lblError.setText("Erreur lors du contact de la base de donnée");
+					}
+				}
+				
 			}
 		});
-		btnInscription.setBounds(172, 215, 89, 23);
+		btnInscription.setBounds(172, 215, 110, 23);
 		contentPane.add(btnInscription);
 	
 	}

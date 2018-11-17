@@ -2,6 +2,7 @@ package be.duhant.projet;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JOptionPane;
 
@@ -39,16 +40,17 @@ public class DAOUser extends DAO<User>{
 		try {
 			Statement stmt = super.connection();
 			int id = getID()+1;
-			String sql = "select id FROM util where login="+obj.getLogin();
+			String sql = "select id_util FROM util where login='"+obj.getLogin()+"'";
+			SimpleDateFormat d = new SimpleDateFormat("dd/MM/YYYY");
 			ResultSet exist = stmt.executeQuery(sql);
 				if(!exist.next()) {				
-				sql = "INSERT INTO util VALUES ("+id+","+ obj.getPassword() + "," + obj.getLogin() +","+ obj.getEmail() + "," + obj.getAddress() + "," + obj.getBirthday() +")";	
+				sql = "INSERT INTO util VALUES ("+id+",'"+ obj.getPassword() + "','" + obj.getLogin() +"','"+ obj.getEmail() + "','" + obj.getAddress()+ "',TO_DATE('"+d.format(obj.getBirthday()) +"', 'DD/MM/YYYY'))";
 				stmt.executeQuery(sql);
 				if(obj instanceof Player) {
 					Player tmp = (Player) obj;
-					sql = "INSERT INTO player VALUES ("+id+","+tmp.getUnit()+","+tmp.getRegisterDate()+")";
+					sql = "INSERT INTO player VALUES ("+id+","+tmp.getUnit()+",TO_DATE('"+ d.format(tmp.getRegisterDate()) +"', 'DD/MM/YYYY'))";
 					stmt.executeQuery(sql);
-					
+					return id;
 				}
 				else {
 					Admin tmp = (Admin) obj;
@@ -59,8 +61,9 @@ public class DAOUser extends DAO<User>{
 		}
 		catch(Exception err) {
 			JOptionPane.showMessageDialog(null,err.getMessage());
+			return -2;
 		}
-		return -2;
+		
 	}
 
 	@Override
