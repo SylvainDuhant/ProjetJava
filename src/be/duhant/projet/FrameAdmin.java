@@ -14,7 +14,7 @@ public class FrameAdmin extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = -8130991796726750683L;
-	private JPanel contentPane;
+	private JPanel contentPane;	
 	
 	public FrameAdmin(Admin ad) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

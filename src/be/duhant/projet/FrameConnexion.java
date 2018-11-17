@@ -22,21 +22,6 @@ public class FrameConnexion extends JFrame {
 	private JPasswordField password;
 	private JLabel lblMessage;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FrameConnexion frame = new FrameConnexion();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
