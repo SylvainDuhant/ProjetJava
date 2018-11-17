@@ -37,7 +37,7 @@ public class DAOGameUser extends DAO<GameUser>{
 	}
 
 	@Override
-	public boolean add(GameUser obj) {
+	public int add(GameUser obj) {
 		int id = getID()+1;
 		SimpleDateFormat d = new SimpleDateFormat("dd/MM/YYYY");
 		String sql = "insert into game_copy values ("+id+","+obj.getGame().getID()+","+ d.format(new Date()) +")";
@@ -45,13 +45,13 @@ public class DAOGameUser extends DAO<GameUser>{
 		try {
 			ResultSet res = stmt.executeQuery(sql);
 			if(res.next()) {
-				return true;
+				return 1;
 			}
-			return false;
+			return -2;
 		}
 		catch(Exception err) {
 			JOptionPane.showMessageDialog(null,err.getMessage());
-			return false;
+			return -2;
 		}
 	}
 

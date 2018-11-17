@@ -35,27 +35,32 @@ public class DAOUser extends DAO<User>{
 	}
 
 	@Override
-	public boolean add(User obj) {
+	public int add(User obj) {
 		try {
 			Statement stmt = super.connection();
 			int id = getID()+1;
-			String sql = "INSERT INTO util VALUES ("+id+","+ obj.getPassword() + "," + obj.getLogin() +","+ obj.getEmail() + "," + obj.getAddress() + "," + obj.getBirthday() +")";	
-			stmt.executeQuery(sql);
-			if(obj instanceof Player) {
-				Player tmp = (Player) obj;
-				sql = "INSERT INTO player VALUES ("+id+","+tmp.getUnit()+","+tmp.getRegisterDate()+")";
+			String sql = "select id FROM util where login="+obj.getLogin();
+			ResultSet exist = stmt.executeQuery(sql);
+				if(!exist.next()) {				
+				sql = "INSERT INTO util VALUES ("+id+","+ obj.getPassword() + "," + obj.getLogin() +","+ obj.getEmail() + "," + obj.getAddress() + "," + obj.getBirthday() +")";	
 				stmt.executeQuery(sql);
-				
+				if(obj instanceof Player) {
+					Player tmp = (Player) obj;
+					sql = "INSERT INTO player VALUES ("+id+","+tmp.getUnit()+","+tmp.getRegisterDate()+")";
+					stmt.executeQuery(sql);
+					
+				}
+				else {
+					Admin tmp = (Admin) obj;
+					sql =  "INSERT INTO admini values("+id+")";
+				}
 			}
-			else {
-				Admin tmp = (Admin) obj;
-				sql =  "INSERT INTO admini values("+id+")";
-			}
+				return -1;
 		}
 		catch(Exception err) {
 			JOptionPane.showMessageDialog(null,err.getMessage());
 		}
-		return false;
+		return -2;
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package be.duhant.projet;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -11,6 +12,9 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FrameInscription extends JFrame {
 
@@ -48,7 +52,7 @@ public class FrameInscription extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Connexion");
+		JLabel lblNewLabel = new JLabel("Inscription");
 		lblNewLabel.setBounds(172, 11, 131, 14);
 		contentPane.add(lblNewLabel);
 		
@@ -73,7 +77,7 @@ public class FrameInscription extends JFrame {
 		contentPane.add(lblAdresse);
 		
 		JLabel lblDateDeNaissance = new JLabel("Date de naissance : ");
-		lblDateDeNaissance.setBounds(66, 184, 138, 14);
+		lblDateDeNaissance.setBounds(58, 184, 138, 14);
 		contentPane.add(lblDateDeNaissance);
 		
 		TFLogin = new JTextField();
@@ -100,9 +104,28 @@ public class FrameInscription extends JFrame {
 		contentPane.add(TGAdresse);
 		TGAdresse.setColumns(10);
 		
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setDateFormatString("d MMMM yyyy");
-		dateChooser.setBounds(172, 184, 252, 20);
-		contentPane.add(dateChooser);
+		
+		JLabel lblError = new JLabel("");
+		lblError.setBounds(117, 36, 277, 14);
+		Color red = new Color(173, 25, 8);
+		lblError.setForeground(red);
+		contentPane.add(lblError);
+		
+		JDateChooser DPBirthday = new JDateChooser();
+		DPBirthday.setDateFormatString("d MMMM yyyy");
+		DPBirthday.setBounds(172, 184, 252, 20);
+		contentPane.add(DPBirthday);
+		
+		JButton btnInscription = new JButton("Inscription");
+		btnInscription.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(PFPassword.getText() != PFConfPassword.getText()) {
+					lblError.setText("Les mots de passes ne correspondent pas !");
+				}
+			}
+		});
+		btnInscription.setBounds(172, 215, 89, 23);
+		contentPane.add(btnInscription);
+	
 	}
 }

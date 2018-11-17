@@ -7,7 +7,7 @@ import oracle.jdbc.pool.OracleDataSource;
 
 public abstract class DAO<T> {
 	public abstract T Find(int id);
-	public abstract boolean add(T obj);
+	public abstract int add(T obj);
 	public abstract int getID();
 	public Statement connection() {
 		try {
