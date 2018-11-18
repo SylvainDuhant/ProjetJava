@@ -41,17 +41,17 @@ public class DAOGame extends DAO<Game> {
 	}
 
 	@Override
-	public boolean add(Game obj) {
+	public int add(Game obj) {
 		try {
 			int id = getID()+1;
 			String sql = "insert into GAME (id_game,id_console,price,namee,developers,editor) VALUES ("+ id + ","+ obj.getPlat().getID()+"," + obj.getUnit() +"," + obj.getName() + ","+ obj.getDevelopers() +"," +obj.getEditor() +")";
 			Statement stmt = super.connection();
 			stmt.executeQuery(sql);
-			return true;
+			return 1;
 		}
 		catch(Exception err) {
 			JOptionPane.showMessageDialog(null,err.getMessage());
-			return false;
+			return -2;
 		}
 	}
 

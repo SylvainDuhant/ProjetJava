@@ -29,18 +29,18 @@ public class DAOOrder extends DAO<Order>{
 	}
 
 	@Override
-	public boolean add(Order obj) {
+	public int add(Order obj) {
 		String sql;
 		Statement stmt = super.connection();
 		int id = getID()+1;
 		try {
 			sql = "insert into ordr values ("+id +","+obj.getPl().getID()+","+obj.getGa().getID()+","+ obj.getRegisterDate()+","+obj.getBeginDate()+","+obj.getEndDate()+","+obj.getAccepted() +")";
 			stmt.executeQuery(sql);
-			return true;
+			return 1;
 		}
 		catch(Exception err) {
 			JOptionPane.showMessageDialog(null,err.getMessage());
-			return false;
+			return -2;
 		}
 		
 	}
