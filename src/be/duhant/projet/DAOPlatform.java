@@ -24,17 +24,17 @@ public class DAOPlatform extends DAO<Platform>{
 	}
 
 	@Override
-	public boolean add(Platform obj) {
+	public int add(Platform obj) {
 		int maxid = getID();
 		String sql = "INSERT INTO CONSOLE (ID_CONSOLE,NAME,RELEASE_DATE) VALUES ("+ (maxid+1) + "," + obj.getplatformName() + "," + obj.getReleaseDate();
 		try {
 			Statement stmt = super.connection();
 			stmt.executeQuery(sql);
-			return true;
+			return 1;
 		}
 		catch(Exception err) {
 			System.out.println(err);
-			return false;
+			return -2;
 		}
 
 	}

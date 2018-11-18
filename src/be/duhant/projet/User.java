@@ -12,6 +12,8 @@ public abstract class User {
 	
 	public User(int id,String password,String login, String email, String address, Date birthday){
 		this.id = id;
+		this.password = password;
+		this.login = login;
 		this.birthday = birthday;
 		this.email = email;
 		this.address = address;
@@ -31,6 +33,9 @@ public abstract class User {
 	}
 	public int getID() {
 		return id;
+	}
+	public void SetID(int id) {
+		this.id = id;
 	}
 
 	public String getPassword() {
