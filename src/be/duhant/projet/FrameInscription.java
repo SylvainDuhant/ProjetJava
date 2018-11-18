@@ -25,22 +25,7 @@ public class FrameInscription extends JFrame {
 	private JPasswordField PFConfPassword;
 	private JTextField TFEmail;
 	private JTextField TGAdresse;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FrameInscription frame = new FrameInscription();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	/**
 	 * Create the frame.
 	 */
@@ -112,7 +97,7 @@ public class FrameInscription extends JFrame {
 		contentPane.add(lblError);
 		
 		JDateChooser DPBirthday = new JDateChooser();
-		DPBirthday.setDateFormatString("d MMMM yyyy");
+		DPBirthday.setDateFormatString("EEEE d MMMM yyyy");
 		DPBirthday.setBounds(172, 184, 252, 20);
 		contentPane.add(DPBirthday);
 		
@@ -128,6 +113,9 @@ public class FrameInscription extends JFrame {
 					int res = dao.add(pl);
 					if(res > 0) {
 						pl.SetID(res);
+						FramePlayer f = new FramePlayer(pl);
+						f.setVisible(true);
+						dispose();
 					}
 					else if(res == -1) {
 						lblError.setText("Le login est déjà utilisé");
@@ -139,8 +127,19 @@ public class FrameInscription extends JFrame {
 				
 			}
 		});
-		btnInscription.setBounds(172, 215, 110, 23);
+		btnInscription.setBounds(284, 215, 110, 23);
 		contentPane.add(btnInscription);
+		
+		JButton btnRetour = new JButton("Retour");
+		btnRetour.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainFrame mf = new MainFrame();
+				mf.setVisible(true);
+				dispose();
+			}
+		});
+		btnRetour.setBounds(44, 215, 89, 23);
+		contentPane.add(btnRetour);
 	
 	}
 }

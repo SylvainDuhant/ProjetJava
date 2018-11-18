@@ -3,7 +3,7 @@ package be.duhant.projet;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 public class DAOUser extends DAO<User>{
@@ -21,7 +21,9 @@ public class DAOUser extends DAO<User>{
 			}
 			else {
 				sql = "select * from util u inner join player p on u.id_util = p.id_util where u.id_util = " + id;
-				stmt.executeQuery(sql);
+				sql = "select register_date from player where id_util = 3";
+				res = stmt.executeQuery(sql);
+				SimpleDateFormat d = new SimpleDateFormat("dd/MM/YYYY");
 				if(res.next()) {
 					u = new Player(res.getInt(1), res.getString(2), res.getString(3), res.getString(4),res.getString(5),res.getDate(6),res.getInt(8),res.getDate(9));
 					return u;
@@ -80,6 +82,7 @@ public class DAOUser extends DAO<User>{
 		catch(Exception err){
 			JOptionPane.showMessageDialog(null,err.getMessage());
 			return -1;
+			
 		}
 		
 	}

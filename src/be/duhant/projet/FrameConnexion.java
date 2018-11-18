@@ -1,6 +1,7 @@
 package be.duhant.projet;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -35,7 +36,9 @@ public class FrameConnexion extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblMessage = new JLabel("");
-		lblMessage.setBounds(117, 236, 197, 14);
+		lblMessage.setBounds(125, 59, 197, 14);
+		Color red = new Color(173, 25, 8);
+		lblMessage.setForeground(red);
 		contentPane.add(lblMessage);
 		
 		login = new JTextField();
@@ -65,6 +68,11 @@ public class FrameConnexion extends JFrame {
 						fa.setVisible(true);
 						dispose();
 					}
+					else {
+						FramePlayer f = new FramePlayer((Player) u);
+						f.setVisible(true);
+						dispose();
+					}
 				}
 				else if(rep == -1) {
 					//pas connecté
@@ -76,11 +84,22 @@ public class FrameConnexion extends JFrame {
 				}
 				}
 		});
-		btnConnexion.setBounds(175, 200, 89, 23);
+		btnConnexion.setBounds(147, 200, 141, 23);
 		contentPane.add(btnConnexion);
 		
 		JLabel lblVousNtesPlus = new JLabel("Vous n'\u00EAtes plus qu'a un click de partager vos jeux ! ");
-		lblVousNtesPlus.setBounds(42, 30, 382, 14);
+		lblVousNtesPlus.setBounds(96, 30, 382, 14);
 		contentPane.add(lblVousNtesPlus);
+		
+		JButton btnRetour = new JButton("Retour");
+		btnRetour.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				MainFrame mf = new MainFrame();
+				mf.setVisible(true);
+				dispose();
+			}
+		});
+		btnRetour.setBounds(175, 236, 89, 23);
+		contentPane.add(btnRetour);
 	}
 }
