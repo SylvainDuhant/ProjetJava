@@ -20,4 +20,8 @@ public class Platform {
 	public int getID() {
 		return ID;
 	}
+	@Override
+	public String toString() {
+		return platformName;
+	}
 }

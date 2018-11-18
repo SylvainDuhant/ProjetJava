@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import com.toedter.calendar.JCalendar;
@@ -104,8 +105,19 @@ public class FrameInscription extends JFrame {
 		JButton btnInscription = new JButton("Inscription");
 		btnInscription.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				boolean isDateSet = false;
+				try {
+					DPBirthday.getDate().toString();
+					isDateSet = true;
+				}
+				catch(Exception err) {
+					isDateSet = false;
+				}
 				if(!PFPassword.getText().equals(PFConfPassword.getText())) {
 					lblError.setText("Les mots de passes ne correspondent pas !");					
+				}	
+				else if(TFLogin.getText().equals("") || PFPassword.getText().equals("") || TFEmail.getText().equals("") || TGAdresse.getText().equals("") || !isDateSet ) {
+					lblError.setText("Certains champs ne sont pas remplis !");
 				}
 				else {
 					DAOUser dao = new DAOUser();

@@ -58,31 +58,36 @@ public class FrameConnexion extends JFrame {
 				String pass = password.getText().toString(); // cryptage possible ici
 				String log = login.getText().toString();
 				DAOUser dao = new DAOUser();
-				int rep = dao.connect(log, pass);
-				if(rep != -1 && rep != -2) {
-					//connecté
-					lblMessage.setText("Vous êtes connecté !");
-					User u = dao.Find(rep);
-					if(u instanceof Admin) {
-						FrameAdmin fa = new FrameAdmin((Admin) u);
-						fa.setVisible(true);
-						dispose();
+				if(!pass.equals("") && !log.equals("")) {
+					int rep = dao.connect(log, pass);
+					if(rep != -1 && rep != -2) {
+						//connecté
+						lblMessage.setText("Vous êtes connecté !");
+						User u = dao.Find(rep);
+						if(u instanceof Admin) {
+							FrameAdmin fa = new FrameAdmin((Admin) u);
+							fa.setVisible(true);
+							dispose();
+						}
+						else {
+							FramePlayer f = new FramePlayer((Player) u);
+							f.setVisible(true);
+							dispose();
+						}
+					}
+					else if(rep == -1) {
+						//pas connecté
+						lblMessage.setText("Mot de passe / Login incorrect");
 					}
 					else {
-						FramePlayer f = new FramePlayer((Player) u);
-						f.setVisible(true);
-						dispose();
+						//erreur base de donnée
+						lblMessage.setText("Base de donnée indisponible");
 					}
-				}
-				else if(rep == -1) {
-					//pas connecté
-					lblMessage.setText("Mot de passe / Login incorrect");
-				}
+					}
 				else {
-					//erreur base de donnée
-					lblMessage.setText("Base de donnée indisponible");
+					lblMessage.setText("Certains champs ne sont pas remplis");
 				}
-				}
+			}
 		});
 		btnConnexion.setBounds(147, 200, 141, 23);
 		contentPane.add(btnConnexion);
