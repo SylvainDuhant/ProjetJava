@@ -21,7 +21,6 @@ public class DAOUser extends DAO<User>{
 			}
 			else {
 				sql = "select * from util u inner join player p on u.id_util = p.id_util where u.id_util = " + id;
-				sql = "select register_date from player where id_util = 3";
 				res = stmt.executeQuery(sql);
 				SimpleDateFormat d = new SimpleDateFormat("dd/MM/YYYY");
 				if(res.next()) {

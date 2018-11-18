@@ -11,15 +11,23 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.FlowLayout;
+import java.awt.Font;
+
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class FrameDeletePlatform extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2263350082539377000L;
 
 	/**
 	 * Create the frame.
@@ -34,10 +42,8 @@ public class FrameDeletePlatform extends JFrame {
 		list.setSelectedIndex(0);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		JScrollPane scrollPane = new JScrollPane(list);
-		scrollPane.setViewportView(list);
 		scrollPane.setBounds(55, 0, 304, 195);
 		getContentPane().add(scrollPane);
-		
 		JButton btnSupprimer = new JButton("Supprimer");
 		btnSupprimer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
