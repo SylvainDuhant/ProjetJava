@@ -34,4 +34,8 @@ public class Game {
 	public Platform getPlat() {
 		return plat;
 	}
+	@Override
+	public String toString() {
+		return  name + "       " + plat.getplatformName();
+	}
 }		
