@@ -23,7 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
-public class FrameDeletePlatform extends JFrame {
+public class FrameDeleteGame extends JFrame {
 
 	/**
 	 * 
@@ -33,12 +33,12 @@ public class FrameDeletePlatform extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrameDeletePlatform(Admin ad) {
+	public FrameDeleteGame(Admin ad) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 635, 449);
-		DAOPlatform daop = new DAOPlatform();
+		DAOGame daog = new DAOGame();
 		getContentPane().setLayout(null);
-		JList<Platform> list = new JList<>(daop.getAll());
+		JList<Game> list = new JList<>(daog.getAll());
 		list.setFont(new Font("Tahoma", Font.BOLD, 21));
 		JScrollPane scrollPane = new JScrollPane(list);
 		scrollPane.setBounds(120, 10, 350, 250);
@@ -51,8 +51,7 @@ public class FrameDeletePlatform extends JFrame {
 		btnSupprimer.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnSupprimer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DAOPlatform dao = new DAOPlatform();
-				dao.delete(list.getSelectedValue().getID());
+				daog.delete(list.getSelectedValue().getID());
 				((DefaultListModel)list.getModel()).remove(list.getSelectedIndex());
 				list.updateUI();
 			}

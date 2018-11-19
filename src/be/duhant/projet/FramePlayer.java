@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import java.awt.Font;
 
 public class FramePlayer extends JFrame {
 
@@ -21,14 +22,15 @@ public class FramePlayer extends JFrame {
 	 */
 	public FramePlayer(Player p) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 635, 449);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblTitre = new JLabel("Bienvenue " + p.getLogin());
-		lblTitre.setBounds(54, 11, 221, 14);
+		lblTitre.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		lblTitre.setBounds(54, 11, 502, 54);
 		contentPane.add(lblTitre);
 	}
 }

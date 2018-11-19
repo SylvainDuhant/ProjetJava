@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class FrameAdmin extends JFrame {
 
@@ -21,37 +22,56 @@ public class FrameAdmin extends JFrame {
 	
 	public FrameAdmin(Admin ad) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 635, 449);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel title = new JLabel("");
-		title.setBounds(127, 11, 239, 14);
+		title.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		title.setBounds(126, 16, 515, 33);
 		title.setText("Bienvenue administrateur " + ad.getLogin());
 		contentPane.add(title);
 		
 		JButton btnAddGame = new JButton("Ajouter un jeu");
+		btnAddGame.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnAddGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				FrameAddGame fag = new FrameAddGame();
+				FrameAddGame fag = new FrameAddGame(ad);
 				fag.setVisible(true);
 				dispose();
 			}
 		});
-		btnAddGame.setBounds(228, 63, 196, 61);
+		btnAddGame.setBounds(321, 60, 298, 70);
 		contentPane.add(btnAddGame);
 		
 		JButton btnDeleteGame = new JButton("Supprimer un jeu");
-		btnDeleteGame.setBounds(10, 63, 196, 61);
+		btnDeleteGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FrameDeleteGame fdg = new FrameDeleteGame(ad);
+				fdg.setVisible(true);
+				dispose();
+			}
+		});
+		btnDeleteGame.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		btnDeleteGame.setBounds(0, 60, 311, 70);
 		contentPane.add(btnDeleteGame);
 		
 		JButton btnChangeUnitCount = new JButton("Modifier nombre unit\u00E9 Joueur");
-		btnChangeUnitCount.setBounds(83, 135, 264, 23);
+		btnChangeUnitCount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FrameChangeUnit fcu = new FrameChangeUnit(ad);
+				fcu.setVisible(true);
+				dispose();
+				}
+		});
+		btnChangeUnitCount.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		btnChangeUnitCount.setBounds(0, 149, 311, 70);
 		contentPane.add(btnChangeUnitCount);
 		
 		JButton btnAddPlatform = new JButton("Ajouter une console");
+		btnAddPlatform.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnAddPlatform.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FrameAddPlatform fap = new FrameAddPlatform(ad);
@@ -59,10 +79,11 @@ public class FrameAdmin extends JFrame {
 				dispose();
 			}
 		});
-		btnAddPlatform.setBounds(228, 169, 196, 61);
+		btnAddPlatform.setBounds(321, 248, 298, 70);
 		contentPane.add(btnAddPlatform);
 		
 		JButton btnDeletePlatform = new JButton("Supprimer une console");
+		btnDeletePlatform.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnDeletePlatform.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FrameDeletePlatform fdg = new FrameDeletePlatform(ad);
@@ -70,8 +91,20 @@ public class FrameAdmin extends JFrame {
 				dispose();
 			}
 		});
-		btnDeletePlatform.setBounds(10, 169, 196, 61);
+		btnDeletePlatform.setBounds(0, 248, 311, 70);
 		contentPane.add(btnDeletePlatform);
+		
+		JButton btnDelPlay = new JButton("Supprimer Joueur");
+		btnDelPlay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				FrameDeletePlayer fdp = new FrameDeletePlayer(ad);
+				fdp.setVisible(true);
+				dispose();
+			}
+		});
+		btnDelPlay.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		btnDelPlay.setBounds(321, 149, 298, 70);
+		contentPane.add(btnDelPlay);
 		
 		
 	}

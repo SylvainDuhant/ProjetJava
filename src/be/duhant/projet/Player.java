@@ -3,6 +3,10 @@ package be.duhant.projet;
 import java.util.Date;
 
 public class Player extends User {
+	@Override
+	public String toString() {
+		return super.getLogin() ;
+	}
 	private int unit;
 	public int getUnit() {
 		return unit;
@@ -24,5 +28,10 @@ public class Player extends User {
 	}
 	public void RayerJoueur() {
 		//appel DAO
+	}
+	
+	public Player ModifyUnit(int newUnit) {
+		DAOUser daou = new DAOUser();
+		 return daou.updateUnit(this, newUnit);
 	}
 }
