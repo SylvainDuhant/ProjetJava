@@ -5,11 +5,13 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class MainFrame extends JFrame {
 
@@ -22,6 +24,7 @@ public class MainFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					MainFrame frame = new MainFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -36,13 +39,15 @@ public class MainFrame extends JFrame {
 	 */
 	public MainFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 635, 449);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JButton but_co = new JButton("Connexion");
+		but_co.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		but_co.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				FrameConnexion fc = new FrameConnexion();
@@ -50,10 +55,11 @@ public class MainFrame extends JFrame {
 				dispose();
 			}
 		});
-		but_co.setBounds(10, 100, 134, 23);
+		but_co.setBounds(10, 100, 240, 109);
 		contentPane.add(but_co);
 		
 		JButton btnInscription = new JButton("Inscription");
+		btnInscription.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnInscription.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FrameInscription fi = new FrameInscription();
@@ -61,11 +67,12 @@ public class MainFrame extends JFrame {
 				dispose();
 			}
 		});
-		btnInscription.setBounds(283, 100, 141, 23);
+		btnInscription.setBounds(337, 100, 251, 109);
 		contentPane.add(btnInscription);
 		
 		JLabel lblTitre = new JLabel("Nouveau  venu ? Inscrivez vous !");
-		lblTitre.setBounds(122, 36, 282, 14);
+		lblTitre.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		lblTitre.setBounds(130, 31, 492, 26);
 		contentPane.add(lblTitre);
 	}
 }

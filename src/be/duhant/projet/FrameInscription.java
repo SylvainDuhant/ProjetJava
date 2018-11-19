@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.Date;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class FrameInscription extends JFrame {
 
@@ -32,61 +33,73 @@ public class FrameInscription extends JFrame {
 	 */
 	public FrameInscription() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 284);
+		setBounds(100, 100, 635, 449);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Inscription");
-		lblNewLabel.setBounds(172, 11, 131, 14);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 21));
+		lblNewLabel.setBounds(234, 16, 160, 32);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblLogin = new JLabel("Login : ");
-		lblLogin.setBounds(128, 59, 46, 14);
+		lblLogin.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		lblLogin.setBounds(58, 48, 138, 32);
 		contentPane.add(lblLogin);
 		
 		JLabel lblMotDePasse = new JLabel("Mot de passe :");
-		lblMotDePasse.setBounds(83, 84, 98, 14);
+		lblMotDePasse.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		lblMotDePasse.setBounds(58, 99, 179, 22);
 		contentPane.add(lblMotDePasse);
 		
 		JLabel lblConfirmezLeMot = new JLabel("Confirmez le mot de passe :");
-		lblConfirmezLeMot.setBounds(10, 109, 174, 14);
+		lblConfirmezLeMot.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		lblConfirmezLeMot.setBounds(0, 137, 281, 32);
 		contentPane.add(lblConfirmezLeMot);
 		
 		JLabel lblEmail = new JLabel("Email : ");
-		lblEmail.setBounds(128, 134, 46, 14);
+		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		lblEmail.setBounds(58, 192, 105, 32);
 		contentPane.add(lblEmail);
 		
 		JLabel lblAdresse = new JLabel("Adresse : ");
-		lblAdresse.setBounds(109, 159, 65, 14);
+		lblAdresse.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		lblAdresse.setBounds(55, 240, 141, 34);
 		contentPane.add(lblAdresse);
 		
 		JLabel lblDateDeNaissance = new JLabel("Date de naissance : ");
-		lblDateDeNaissance.setBounds(58, 184, 138, 14);
+		lblDateDeNaissance.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		lblDateDeNaissance.setBounds(25, 297, 229, 25);
 		contentPane.add(lblDateDeNaissance);
 		
 		TFLogin = new JTextField();
-		TFLogin.setBounds(172, 56, 252, 20);
+		TFLogin.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		TFLogin.setBounds(327, 48, 271, 32);
 		contentPane.add(TFLogin);
 		TFLogin.setColumns(10);
 		
 		PFPassword = new JPasswordField();
-		PFPassword.setBounds(172, 81, 252, 20);
+		PFPassword.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		PFPassword.setBounds(327, 94, 271, 32);
 		contentPane.add(PFPassword);
 		
 		PFConfPassword = new JPasswordField();
-		PFConfPassword.setBounds(172, 109, 252, 20);
+		PFConfPassword.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		PFConfPassword.setBounds(327, 136, 271, 35);
 		contentPane.add(PFConfPassword);
 		
 		TFEmail = new JTextField();
+		TFEmail.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		TFEmail.setText("");
-		TFEmail.setBounds(172, 134, 252, 20);
+		TFEmail.setBounds(327, 189, 271, 35);
 		contentPane.add(TFEmail);
 		TFEmail.setColumns(10);
 		
 		TGAdresse = new JTextField();
-		TGAdresse.setBounds(172, 159, 252, 20);
+		TGAdresse.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		TGAdresse.setBounds(327, 242, 271, 32);
 		contentPane.add(TGAdresse);
 		TGAdresse.setColumns(10);
 		
@@ -99,10 +112,11 @@ public class FrameInscription extends JFrame {
 		
 		JDateChooser DPBirthday = new JDateChooser();
 		DPBirthday.setDateFormatString("EEEE d MMMM yyyy");
-		DPBirthday.setBounds(172, 184, 252, 20);
+		DPBirthday.setBounds(327, 290, 271, 32);
 		contentPane.add(DPBirthday);
 		
 		JButton btnInscription = new JButton("Inscription");
+		btnInscription.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnInscription.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				boolean isDateSet = false;
@@ -139,10 +153,11 @@ public class FrameInscription extends JFrame {
 				
 			}
 		});
-		btnInscription.setBounds(284, 215, 110, 23);
+		btnInscription.setBounds(393, 338, 160, 55);
 		contentPane.add(btnInscription);
 		
 		JButton btnRetour = new JButton("Retour");
+		btnRetour.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainFrame mf = new MainFrame();
@@ -150,7 +165,7 @@ public class FrameInscription extends JFrame {
 				dispose();
 			}
 		});
-		btnRetour.setBounds(44, 215, 89, 23);
+		btnRetour.setBounds(25, 338, 160, 55);
 		contentPane.add(btnRetour);
 	
 	}

@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class FrameConnexion extends JFrame {
 
@@ -29,7 +30,7 @@ public class FrameConnexion extends JFrame {
 	 */
 	public FrameConnexion() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 635, 449);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -42,17 +43,20 @@ public class FrameConnexion extends JFrame {
 		contentPane.add(lblMessage);
 		
 		login = new JTextField();
+		login.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		login.setToolTipText("Login");
-		login.setBounds(175, 84, 86, 20);
+		login.setBounds(175, 89, 393, 39);
 		contentPane.add(login);
 		login.setColumns(10);
 		
 		password = new JPasswordField();
+		password.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		password.setToolTipText("Password");
-		password.setBounds(175, 139, 86, 20);
+		password.setBounds(175, 166, 393, 39);
 		contentPane.add(password);
 		
 		JButton btnConnexion = new JButton("Connexion");
+		btnConnexion.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnConnexion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String pass = password.getText().toString(); // cryptage possible ici
@@ -89,14 +93,16 @@ public class FrameConnexion extends JFrame {
 				}
 			}
 		});
-		btnConnexion.setBounds(147, 200, 141, 23);
+		btnConnexion.setBounds(147, 221, 303, 70);
 		contentPane.add(btnConnexion);
 		
 		JLabel lblVousNtesPlus = new JLabel("Vous n'\u00EAtes plus qu'a un click de partager vos jeux ! ");
-		lblVousNtesPlus.setBounds(96, 30, 382, 14);
+		lblVousNtesPlus.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		lblVousNtesPlus.setBounds(63, 28, 571, 26);
 		contentPane.add(lblVousNtesPlus);
 		
 		JButton btnRetour = new JButton("Retour");
+		btnRetour.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				MainFrame mf = new MainFrame();
@@ -104,7 +110,17 @@ public class FrameConnexion extends JFrame {
 				dispose();
 			}
 		});
-		btnRetour.setBounds(175, 236, 89, 23);
+		btnRetour.setBounds(147, 307, 303, 70);
 		contentPane.add(btnRetour);
+		
+		JLabel lblLogin = new JLabel("Login : ");
+		lblLogin.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		lblLogin.setBounds(63, 89, 133, 31);
+		contentPane.add(lblLogin);
+		
+		JLabel lblPassword = new JLabel("Password : ");
+		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		lblPassword.setBounds(27, 170, 133, 31);
+		contentPane.add(lblPassword);
 	}
 }

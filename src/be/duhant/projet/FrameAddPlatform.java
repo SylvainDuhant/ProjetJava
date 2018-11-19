@@ -13,6 +13,7 @@ import com.toedter.calendar.JDateChooser;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class FrameAddPlatform extends JFrame {
 
@@ -24,41 +25,47 @@ public class FrameAddPlatform extends JFrame {
 	 */
 	public FrameAddPlatform(Admin ad) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 635, 449);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblAjoutDuneConsole = new JLabel("Ajout d'une console");
-		lblAjoutDuneConsole.setBounds(150, 11, 209, 14);
+		lblAjoutDuneConsole.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		lblAjoutDuneConsole.setBounds(193, 16, 296, 27);
 		contentPane.add(lblAjoutDuneConsole);
 		
 		JLabel lblNom = new JLabel("Nom : ");
-		lblNom.setBounds(48, 54, 46, 14);
+		lblNom.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		lblNom.setBounds(92, 97, 84, 39);
 		contentPane.add(lblNom);
 		
 		JLabel lblDateDeSortie = new JLabel("Date de sortie :");
-		lblDateDeSortie.setBounds(10, 79, 84, 14);
+		lblDateDeSortie.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		lblDateDeSortie.setBounds(9, 205, 145, 20);
 		contentPane.add(lblDateDeSortie);
 		
 		TFName = new JTextField();
-		TFName.setBounds(104, 51, 86, 20);
+		TFName.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		TFName.setBounds(169, 90, 384, 52);
 		contentPane.add(TFName);
 		TFName.setColumns(10);
 		
 		JDateChooser DCRelease = new JDateChooser();
-		DCRelease.setBounds(103, 79, 87, 20);
+		DCRelease.setBounds(169, 191, 383, 52);
 		contentPane.add(DCRelease);
 		
 		JLabel lblErr = new JLabel("");
+		lblErr.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		Color red = new Color(173, 25, 8);
 		Color green = new Color(10,115,13) ;
-		lblErr.setBounds(111, 198, 248, 14);
+		lblErr.setBounds(138, 347, 338, 30);
 		contentPane.add(lblErr);
 		
 		
 		JButton btnAdd = new JButton("Ajouter");
+		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean isDate = false;
@@ -94,10 +101,11 @@ public class FrameAddPlatform extends JFrame {
 				
 			}
 		});
-		btnAdd.setBounds(101, 120, 89, 23);
+		btnAdd.setBounds(399, 259, 179, 81);
 		contentPane.add(btnAdd);
 		
 		JButton Retour = new JButton("Retour");
+		Retour.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		Retour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FrameAdmin fa = new FrameAdmin(ad);
@@ -105,7 +113,7 @@ public class FrameAddPlatform extends JFrame {
 				dispose();
 			}
 		});
-		Retour.setBounds(101, 154, 89, 23);
+		Retour.setBounds(15, 259, 179, 81);
 		contentPane.add(Retour);
 
 		
