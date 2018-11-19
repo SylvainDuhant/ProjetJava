@@ -3,7 +3,11 @@ package be.duhant.projet;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 public class DAOUser extends DAO<User>{
@@ -21,7 +25,6 @@ public class DAOUser extends DAO<User>{
 			}
 			else {
 				sql = "select * from util u inner join player p on u.id_util = p.id_util where u.id_util = " + id;
-				sql = "select register_date from player where id_util = 3";
 				res = stmt.executeQuery(sql);
 				SimpleDateFormat d = new SimpleDateFormat("dd/MM/YYYY");
 				if(res.next()) {
@@ -103,6 +106,53 @@ public class DAOUser extends DAO<User>{
 			JOptionPane.showMessageDialog(null,err.getMessage());
 			return -2;
 		}
+	}
+	
+	public DefaultListModel<Player> getAll(){
+		DefaultListModel<Player> list = new DefaultListModel<Player>();
+		try {
+			Statement stmt = super.connection();
+			String sql = "select * from util u inner join player p on p.id_util = u.id_util";
+			ResultSet res = stmt.executeQuery(sql);
+			DAOPlatform dao = new DAOPlatform();
+			while(res.next()) {
+				list.addElement(new Player(res.getInt(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getDate(6),res.getInt(8),res.getDate(9)));
+			}
+			return list;
+		}
+		catch(Exception err){
+			JOptionPane.showMessageDialog(null,err.getMessage());
+			return null;
+		}
+	}
+	
+	public Player updateUnit(Player pl, int unit) {
+		String sql = "update player set unit = "+ unit + " where id_util = " + pl.getID();
+		Statement stmt = super.connection();
+		try {
+			stmt.executeQuery(sql);
+			pl.setUnit(unit);
+			return pl;
+		}
+		catch(Exception err){
+			JOptionPane.showMessageDialog(null,err.getMessage());
+			return null;
+		}
+	}
+	
+	public int deletePlayer(Player pl) {
+		String sql = "delete player where id_util = "+pl.getID();
+		Statement stmt = super.connection();
+		try {
+			stmt.executeQuery(sql);
+			sql = "delete util where id_util = " + pl.getID();
+			return 1;
+		}
+		catch(Exception err){
+			JOptionPane.showMessageDialog(null,err.getMessage());
+			return -2;
+		}
+		
 	}
 
 }
