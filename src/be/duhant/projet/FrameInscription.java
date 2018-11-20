@@ -134,11 +134,9 @@ public class FrameInscription extends JFrame {
 					lblError.setText("Certains champs ne sont pas remplis !");
 				}
 				else {
-					DAOUser dao = new DAOUser();
 					Player pl = new Player(-1, PFPassword.getText() ,TFLogin.getText(), TFEmail.getText(), TGAdresse.getText(), DPBirthday.getDate() , 10, new Date());
-					int res = dao.add(pl);
+					int res = pl.Create();
 					if(res > 0) {
-						pl.SetID(res);
 						FramePlayer f = new FramePlayer(pl);
 						f.setVisible(true);
 						dispose();

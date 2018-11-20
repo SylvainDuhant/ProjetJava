@@ -2,6 +2,9 @@ package be.duhant.projet;
 
 import java.util.Date;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 public abstract class User {
 	private int id;
 	private String login;
@@ -9,6 +12,7 @@ public abstract class User {
 	private String email;
 	private String password;
 	private String address;
+	static DAOUser dao;
 	
 	public User(int id,String password,String login, String email, String address, Date birthday){
 		this.id = id;
@@ -17,6 +21,7 @@ public abstract class User {
 		this.birthday = birthday;
 		this.email = email;
 		this.address = address;
+		dao = new DAOUser();
 	}
 	
 	public String getLogin() {
@@ -40,5 +45,12 @@ public abstract class User {
 
 	public String getPassword() {
 		return password;
+	}
+	
+	public static User Find(int id) {
+		return dao.Find(id);
+	}
+	public static int Login(String lg, String pw) {
+		return dao.connect(lg, pw);
 	}
 }

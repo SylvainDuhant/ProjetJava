@@ -78,8 +78,7 @@ public class FrameAddPlatform extends JFrame {
 				}
 				if(!TFName.getText().toString().equals("")&&isDate) {
 					Platform plat = new Platform(-1, TFName.getText().toString(), DCRelease.getDate());
-					DAOPlatform dao = new DAOPlatform();
-					int res = dao.add(plat);
+					int res = plat.Create();
 					if(res>0) {
 						lblErr.setForeground(green);
 						lblErr.setText("La Console a été ajoutée !");

@@ -36,9 +36,8 @@ public class FrameDeleteGame extends JFrame {
 	public FrameDeleteGame(Admin ad) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 635, 449);
-		DAOGame daog = new DAOGame();
 		getContentPane().setLayout(null);
-		JList<Game> list = new JList<>(daog.getAll());
+		JList<Game> list = new JList<>(Game.getAll());
 		list.setFont(new Font("Tahoma", Font.BOLD, 21));
 		JScrollPane scrollPane = new JScrollPane(list);
 		scrollPane.setBounds(120, 10, 350, 250);
@@ -51,7 +50,7 @@ public class FrameDeleteGame extends JFrame {
 		btnSupprimer.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnSupprimer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				daog.delete(list.getSelectedValue().getID());
+				list.getSelectedValue().delete();
 				((DefaultListModel)list.getModel()).remove(list.getSelectedIndex());
 				list.updateUI();
 			}

@@ -44,6 +44,7 @@ public class MainFrame extends JFrame {
 		setBounds(100, 100, 930, 572);
 		setBounds(100, 100, 635, 449);
 		
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
