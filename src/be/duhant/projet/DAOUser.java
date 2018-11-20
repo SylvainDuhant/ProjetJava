@@ -3,9 +3,6 @@ package be.duhant.projet;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -26,7 +23,6 @@ public class DAOUser extends DAO<User>{
 			else {
 				sql = "select * from util u inner join player p on u.id_util = p.id_util where u.id_util = " + id;
 				res = stmt.executeQuery(sql);
-				SimpleDateFormat d = new SimpleDateFormat("dd/MM/YYYY");
 				if(res.next()) {
 					u = new Player(res.getInt(1), res.getString(2), res.getString(3), res.getString(4),res.getString(5),res.getDate(6),res.getInt(8),res.getDate(9));
 					return u;
@@ -58,7 +54,6 @@ public class DAOUser extends DAO<User>{
 					return id;
 				}
 				else {
-					Admin tmp = (Admin) obj;
 					sql =  "INSERT INTO admini values("+id+")";
 				}
 			}
@@ -114,7 +109,6 @@ public class DAOUser extends DAO<User>{
 			Statement stmt = super.connection();
 			String sql = "select * from util u inner join player p on p.id_util = u.id_util";
 			ResultSet res = stmt.executeQuery(sql);
-			DAOPlatform dao = new DAOPlatform();
 			while(res.next()) {
 				list.addElement(new Player(res.getInt(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getDate(6),res.getInt(8),res.getDate(9)));
 			}

@@ -1,27 +1,17 @@
 package be.duhant.projet;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.UIManager;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
-import java.awt.FlowLayout;
 import java.awt.Font;
-
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.Font;
 
 public class FrameDeletePlatform extends JFrame {
 
@@ -51,7 +41,7 @@ public class FrameDeletePlatform extends JFrame {
 		btnSupprimer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				list.getSelectedValue().delete();
-				((DefaultListModel)list.getModel()).remove(list.getSelectedIndex());
+				((DefaultListModel<Platform>)list.getModel()).remove(list.getSelectedIndex());
 				list.updateUI();
 			}
 		});

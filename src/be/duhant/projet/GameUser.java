@@ -1,9 +1,5 @@
 package be.duhant.projet;
 
-import java.util.Date;
-
-import javax.swing.DefaultListModel;
-
 	public class GameUser {
 		private int id = -1;
 		private Game ga;

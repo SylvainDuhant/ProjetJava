@@ -2,9 +2,7 @@ package be.duhant.projet;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -54,7 +52,6 @@ public class DAOGameUser extends DAO<GameUser>{
 		else {
 			tmp = 0;
 		}
-		SimpleDateFormat d = new SimpleDateFormat("dd/MM/YYYY");
 		String sql = "insert into game_copy values ("+id+","+obj.getGame().getID()+","+ obj.getPlayer().getID() +","+ tmp +")";
 		Statement stmt = super.connection();
 		try {

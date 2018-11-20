@@ -1,10 +1,7 @@
 package be.duhant.projet;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
-
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -22,6 +19,10 @@ import javax.swing.JLabel;
 
 public class FrameLibrary extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1826587537964148882L;
 	private JPanel contentPane;
 
 	/**

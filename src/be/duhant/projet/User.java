@@ -2,9 +2,6 @@ package be.duhant.projet;
 
 import java.util.Date;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
-
 public abstract class User {
 	private int id;
 	private String login;

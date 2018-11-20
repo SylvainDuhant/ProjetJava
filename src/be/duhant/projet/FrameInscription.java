@@ -1,17 +1,12 @@
 package be.duhant.projet;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
-import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -21,6 +16,10 @@ import java.awt.Font;
 
 public class FrameInscription extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7351419008475071127L;
 	private JPanel contentPane;
 	private JTextField TFLogin;
 	private JPasswordField PFPassword;
@@ -119,6 +118,7 @@ public class FrameInscription extends JFrame {
 		JButton btnInscription = new JButton("Inscription");
 		btnInscription.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnInscription.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
 				boolean isDateSet = false;
 				try {

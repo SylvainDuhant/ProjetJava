@@ -1,10 +1,7 @@
 package be.duhant.projet;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
-
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -19,6 +16,10 @@ import java.awt.event.ActionEvent;
 
 public class FrameDeletePlayer extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3432529283252035793L;
 	private JPanel contentPane;
 	/**
 	 * Create the frame.
@@ -45,7 +46,7 @@ public class FrameDeletePlayer extends JFrame {
 		btnDeletePlayer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					list.getSelectedValue().delete();
-					((DefaultListModel)list.getModel()).remove(list.getSelectedIndex());
+					((DefaultListModel<Player>)list.getModel()).remove(list.getSelectedIndex());
 					list.updateUI();
 			}
 		});

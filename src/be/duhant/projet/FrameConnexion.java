@@ -1,9 +1,6 @@
 package be.duhant.projet;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -11,7 +8,6 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -19,10 +15,13 @@ import java.awt.Font;
 
 public class FrameConnexion extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -548508163634242887L;
 	private JPanel contentPane;
 	private JTextField login;
 	private JPasswordField password;
-	private JLabel lblMessage;
 
 
 	/**
@@ -60,6 +59,7 @@ public class FrameConnexion extends JFrame {
 		btnConnexion.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnConnexion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				@SuppressWarnings("deprecation")
 				String pass = password.getText().toString(); // cryptage possible ici
 				String log = login.getText().toString();;
 				if(!pass.equals("") && !log.equals("")) {

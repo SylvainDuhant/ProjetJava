@@ -1,8 +1,6 @@
 package be.duhant.projet;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -19,7 +17,11 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class FrameAddGame extends JFrame {
-//Game(int ID,Platform plat, int unit, String name, String developers, String editor )
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3617305318333345479L;
+	//Game(int ID,Platform plat, int unit, String name, String developers, String editor )
 	private JPanel contentPane;
 	private JTextField TFUnit;
 	private JTextField TFDev;

@@ -1,9 +1,7 @@
 package be.duhant.projet;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.EventQueue;
 
+import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -11,17 +9,18 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import javax.swing.JList;
-
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.JSpinner;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class FrameAddGameUser extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4518989071240441971L;
 	private JList<Game> list2;
 	private JPanel contentPane;
 	private JTextField TFName;

@@ -1,9 +1,6 @@
 package be.duhant.projet;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -17,6 +14,10 @@ import java.awt.Font;
 
 public class FrameAddPlatform extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1974981472712969622L;
 	private JPanel contentPane;
 	private JTextField TFName;
 
