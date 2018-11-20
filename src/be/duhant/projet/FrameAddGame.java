@@ -124,8 +124,7 @@ public class FrameAddGame extends JFrame {
 				}
 				if(isUnitValid && !TFName.getText().toString().equals("") && !TFEd.getText().toString().equals("") && !TFDev.getText().toString().equals("") ) {
 					Game g = new Game(-1, list.getSelectedValue() , unit, TFName.getText().toString(), TFDev.getText().toString(),TFEd.getText().toString());
-					DAOGame dao = new DAOGame();
-					int res = dao.add(g);
+					int res = g.add();
 					if(res >-1) {
 						lblErr.setForeground(Color.GREEN);
 						lblErr.setText("Jeu ajouté");

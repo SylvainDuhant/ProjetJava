@@ -38,4 +38,14 @@ public class Game {
 	public String toString() {
 		return  name + "       " + plat.getplatformName();
 	}
+	
+	public int add() {
+		DAOGame dao = new DAOGame();
+		int res = dao.add(this);
+		return res;
+	}
+	public void delete() {
+		DAOGame daog = new DAOGame();
+		daog.delete(ID);
+	}
 }		

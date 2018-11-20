@@ -51,7 +51,7 @@ public class FrameDeleteGame extends JFrame {
 		btnSupprimer.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnSupprimer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				daog.delete(list.getSelectedValue().getID());
+				list.getSelectedValue().delete();
 				((DefaultListModel)list.getModel()).remove(list.getSelectedIndex());
 				list.updateUI();
 			}
