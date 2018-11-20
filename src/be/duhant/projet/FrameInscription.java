@@ -41,7 +41,7 @@ public class FrameInscription extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("Inscription");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 21));
-		lblNewLabel.setBounds(234, 16, 160, 32);
+		lblNewLabel.setBounds(393, 5, 160, 32);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblLogin = new JLabel("Login : ");
@@ -105,7 +105,8 @@ public class FrameInscription extends JFrame {
 		
 		
 		JLabel lblError = new JLabel("");
-		lblError.setBounds(117, 36, 277, 14);
+		lblError.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblError.setBounds(10, 14, 357, 34);
 		Color red = new Color(173, 25, 8);
 		lblError.setForeground(red);
 		contentPane.add(lblError);

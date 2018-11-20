@@ -132,4 +132,22 @@ public class DAOGame extends DAO<Game> {
 			JOptionPane.showMessageDialog(null,err.getMessage());
 		}
 	}
+	
+	public DefaultListModel<Game> getAll(String nom, Platform plat){
+		DefaultListModel<Game> lt = new DefaultListModel<Game>();
+		Statement stmt = super.connection();
+		String sql = "Select * from game where namee like '%"+nom+"%' AND id_console ="+plat.getID();
+		DAOPlatform daop = new DAOPlatform();
+		try {
+			ResultSet res = stmt.executeQuery(sql);
+			while(res.next()) {
+				lt.addElement(new Game(res.getInt(1), daop.Find(res.getInt(2)), res.getInt(3),res.getString(4),res.getString(5),res.getString(6))); 
+			}
+			return lt;
+		}
+		catch(Exception err) {
+			JOptionPane.showMessageDialog(null,err.getMessage());
+			return null;
+		}
+	}
 }

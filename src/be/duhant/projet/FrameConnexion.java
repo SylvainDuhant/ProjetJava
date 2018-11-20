@@ -37,7 +37,8 @@ public class FrameConnexion extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblMessage = new JLabel("");
-		lblMessage.setBounds(125, 59, 197, 14);
+		lblMessage.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblMessage.setBounds(59, 59, 509, 26);
 		Color red = new Color(173, 25, 8);
 		lblMessage.setForeground(red);
 		contentPane.add(lblMessage);

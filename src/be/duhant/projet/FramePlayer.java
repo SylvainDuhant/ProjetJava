@@ -8,6 +8,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FramePlayer extends JFrame {
 
@@ -30,7 +33,19 @@ public class FramePlayer extends JFrame {
 		
 		JLabel lblTitre = new JLabel("Bienvenue " + p.getLogin());
 		lblTitre.setFont(new Font("Tahoma", Font.PLAIN, 21));
-		lblTitre.setBounds(141, 11, 502, 54);
+		lblTitre.setBounds(117, 11, 502, 54);
 		contentPane.add(lblTitre);
+		
+		JButton btnaddGame = new JButton("Ajouter un jeu");
+		btnaddGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FrameAddGameUser fagu = new FrameAddGameUser(p);
+				fagu.setVisible(true);
+				dispose();
+			}
+		});
+		btnaddGame.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		btnaddGame.setBounds(10, 76, 204, 66);
+		contentPane.add(btnaddGame);
 	}
 }

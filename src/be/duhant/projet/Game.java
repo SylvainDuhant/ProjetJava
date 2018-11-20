@@ -63,4 +63,7 @@ public class Game {
 	static public DefaultListModel<Game> getAll(){
 		return dao.getAll();
 	}
+	static public DefaultListModel<Game> getAll(String nom,Platform plat){
+		return dao.getAll(nom, plat);
+	}
 }		

@@ -51,6 +51,7 @@ public abstract class User {
 		return dao.Find(id);
 	}
 	public static int Login(String lg, String pw) {
+		dao = new DAOUser();
 		return dao.connect(lg, pw);
 	}
 }

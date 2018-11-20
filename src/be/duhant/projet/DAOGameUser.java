@@ -24,7 +24,14 @@ public class DAOGameUser extends DAO<GameUser>{
 				Game ga = daoG.Find(res.getInt(2));
 				DAOUser daoP = new DAOUser();
 				Player pl = (Player) daoP.Find(res.getInt(3));
-				gu = new GameUser(ga,pl,res.getDate(4));
+				boolean tmp;
+				if(res.getInt(4) == 1) {
+					tmp = true;
+				}
+				else {
+					tmp = false;
+				}
+				gu = new GameUser(ga,pl,tmp);
 				return gu;
 			}
 			JOptionPane.showMessageDialog(null,"l'exemplaire recherché n'existe pas");
@@ -39,15 +46,19 @@ public class DAOGameUser extends DAO<GameUser>{
 	@Override
 	public int add(GameUser obj) {
 		int id = getID()+1;
+		int tmp;
+		if(obj.getAvailability()) {
+			tmp = 1;
+		}
+		else {
+			tmp = 0;
+		}
 		SimpleDateFormat d = new SimpleDateFormat("dd/MM/YYYY");
-		String sql = "insert into game_copy values ("+id+","+obj.getGame().getID()+","+ d.format(new Date()) +")";
+		String sql = "insert into game_copy values ("+id+","+obj.getGame().getID()+","+ obj.getPlayer().getID() +","+ tmp +")";
 		Statement stmt = super.connection();
 		try {
-			ResultSet res = stmt.executeQuery(sql);
-			if(res.next()) {
-				return 1;
-			}
-			return -2;
+			stmt.executeQuery(sql);
+			return 1;
 		}
 		catch(Exception err) {
 			JOptionPane.showMessageDialog(null,err.getMessage());
@@ -64,7 +75,7 @@ public class DAOGameUser extends DAO<GameUser>{
 			if (stmt != null) {
 				ResultSet resultat = stmt.executeQuery(sql);
 				if(resultat.next()) {
-					id = resultat.getInt(0);
+					id = resultat.getInt(1);
 					return id;
 				}
 				return 0;
@@ -72,7 +83,7 @@ public class DAOGameUser extends DAO<GameUser>{
 			return -1;
 		}
 		catch(Exception err){
-			System.out.println(err);
+			JOptionPane.showMessageDialog(null,err.getMessage());
 			return -1;
 		}
 	}
@@ -87,9 +98,16 @@ public class DAOGameUser extends DAO<GameUser>{
 			String sql = "select * from game_copy";
 			ResultSet res = stmt.executeQuery(sql);
 			while(res.next()) {
+				boolean tmp;
+				if(res.getInt(4) == 1) {
+					tmp = true;
+				}
+				else {
+					tmp = false;
+				}
 				ga = daoG.Find(res.getInt(2));
 				pl = (Player) daoP.Find(res.getInt(3));
-				li.add(new GameUser(ga,pl,res.getDate(4)));
+				li.add(new GameUser(ga,pl,tmp));
 			}
 			return li;
 		}

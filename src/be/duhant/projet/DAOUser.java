@@ -146,6 +146,7 @@ public class DAOUser extends DAO<User>{
 		try {
 			stmt.executeQuery(sql);
 			sql = "delete util where id_util = " + pl.getID();
+			stmt.executeQuery(sql);
 			return 1;
 		}
 		catch(Exception err){

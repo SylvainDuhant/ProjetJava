@@ -5,12 +5,13 @@ import java.util.Date;
 	public class GameUser {
 		private Game ga;
 		private Player pl;
-		private Date disponibilityDate;
+		private  boolean available;
+		private DAOGameUser dao = new DAOGameUser();
 	
-	public GameUser(Game ga,Player pl, Date d) {
+	public GameUser(Game ga,Player pl, boolean av) {
 		this.ga = ga;
 		this.pl = pl;
-		disponibilityDate = d;
+		available = av;
 	}
 	
 	public Game getGame() {
@@ -19,7 +20,14 @@ import java.util.Date;
 	public Player getPlayer() {
 		return pl;
 	}
-	public Date getDate() {
-		return disponibilityDate;
+	public boolean getAvailability() {
+		return available;
+	}
+	public void setAvailability(boolean b) {
+		available = b;
+	}
+	
+	public int Create() {
+		return dao.add(this);
 	}
 }
