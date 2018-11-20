@@ -2,6 +2,9 @@ package be.duhant.projet;
 
 import java.util.Date;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 public class Player extends User {
 	@Override
 	public String toString() {
@@ -31,7 +34,16 @@ public class Player extends User {
 	}
 	
 	public Player ModifyUnit(int newUnit) {
-		DAOUser daou = new DAOUser();
-		 return daou.updateUnit(this, newUnit);
+		 return dao.updateUnit(this, newUnit);
+	}
+	
+	public void delete() {
+			dao.deletePlayer(this);
+		}
+	public static DefaultListModel<Player> getALL(){
+		return dao.getAll();
+	}
+	public int Create() {
+		return dao.add(this);
 	}
 }

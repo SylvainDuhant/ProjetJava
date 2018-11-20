@@ -60,14 +60,13 @@ public class FrameConnexion extends JFrame {
 		btnConnexion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String pass = password.getText().toString(); // cryptage possible ici
-				String log = login.getText().toString();
-				DAOUser dao = new DAOUser();
+				String log = login.getText().toString();;
 				if(!pass.equals("") && !log.equals("")) {
-					int rep = dao.connect(log, pass);
+					int rep = User.Login(log, pass);
 					if(rep != -1 && rep != -2) {
 						//connecté
 						lblMessage.setText("Vous êtes connecté !");
-						User u = dao.Find(rep);
+						User u = User.Find(rep);
 						if(u instanceof Admin) {
 							FrameAdmin fa = new FrameAdmin((Admin) u);
 							fa.setVisible(true);

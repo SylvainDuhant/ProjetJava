@@ -34,6 +34,7 @@ public class FrameAdmin extends JFrame {
 		title.setText("Bienvenue administrateur " + ad.getLogin());
 		contentPane.add(title);
 		
+		
 		JButton btnAddGame = new JButton("Ajouter un jeu");
 		btnAddGame.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnAddGame.addActionListener(new ActionListener() {

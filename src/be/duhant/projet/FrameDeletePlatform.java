@@ -36,9 +36,8 @@ public class FrameDeletePlatform extends JFrame {
 	public FrameDeletePlatform(Admin ad) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 635, 449);
-		DAOPlatform daop = new DAOPlatform();
 		getContentPane().setLayout(null);
-		JList<Platform> list = new JList<>(daop.getAll());
+		JList<Platform> list = new JList<>(Platform.getALL());
 		list.setFont(new Font("Tahoma", Font.BOLD, 21));
 		JScrollPane scrollPane = new JScrollPane(list);
 		scrollPane.setBounds(120, 10, 350, 250);
@@ -51,8 +50,7 @@ public class FrameDeletePlatform extends JFrame {
 		btnSupprimer.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnSupprimer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DAOPlatform dao = new DAOPlatform();
-				dao.delete(list.getSelectedValue().getID());
+				list.getSelectedValue().delete();
 				((DefaultListModel)list.getModel()).remove(list.getSelectedIndex());
 				list.updateUI();
 			}

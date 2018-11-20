@@ -30,7 +30,7 @@ public class FramePlayer extends JFrame {
 		
 		JLabel lblTitre = new JLabel("Bienvenue " + p.getLogin());
 		lblTitre.setFont(new Font("Tahoma", Font.PLAIN, 21));
-		lblTitre.setBounds(54, 11, 502, 54);
+		lblTitre.setBounds(141, 11, 502, 54);
 		contentPane.add(lblTitre);
 	}
 }

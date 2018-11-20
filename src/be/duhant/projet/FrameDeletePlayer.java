@@ -31,8 +31,7 @@ public class FrameDeletePlayer extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		DAOUser daou = new DAOUser();
-		JList<Player> list = new JList<>(daou.getAll());
+		JList<Player> list = new JList<>(Player.getALL());
 		list.setFont(new Font("Tahoma", Font.BOLD, 21));
 		JScrollPane scrollPane = new JScrollPane(list);
 		scrollPane.setBounds(50, 10, 500, 300);
@@ -45,7 +44,7 @@ public class FrameDeletePlayer extends JFrame {
 		JButton btnDeletePlayer = new JButton("Supprimer");
 		btnDeletePlayer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					daou.deletePlayer(list.getSelectedValue());
+					list.getSelectedValue().delete();
 					((DefaultListModel)list.getModel()).remove(list.getSelectedIndex());
 					list.updateUI();
 			}

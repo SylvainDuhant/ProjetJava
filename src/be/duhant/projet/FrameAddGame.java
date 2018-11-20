@@ -45,11 +45,10 @@ public class FrameAddGame extends JFrame {
 				dispose();
 			}
 		});
-		DAOPlatform daop = new DAOPlatform();
 		btnRetour.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnRetour.setBounds(344, 373, 129, 26);
 		contentPane.add(btnRetour);
-		JList<Platform> list = new JList<>(daop.getAll());
+		JList<Platform> list = new JList<>(Platform.getALL());
 		list.setBounds(209, 11, 302, 193);
 		list.setFont(new Font("Tahoma", Font.BOLD, 21));
 		list.setBorder(new LineBorder(new Color(0, 0, 0)));

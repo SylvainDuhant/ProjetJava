@@ -40,8 +40,7 @@ public class FrameChangeUnit extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		DAOUser daou = new DAOUser();
-		JList<Player> list = new JList<>(daou.getAll());
+		JList<Player> list = new JList<>(Player.getALL());
 		list.setFont(new Font("Tahoma", Font.BOLD, 21));
 		JScrollPane scrollPane = new JScrollPane(list);
 		scrollPane.setBounds(10, 10, 350, 250);
