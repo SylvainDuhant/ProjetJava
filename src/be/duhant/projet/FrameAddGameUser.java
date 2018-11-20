@@ -83,7 +83,7 @@ public class FrameAddGameUser extends JFrame {
 		btnAjouter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
 				if(displayed){
-					GameUser ng = new GameUser(list2.getSelectedValue(), pl, true);
+					GameUser ng = new GameUser(-1,list2.getSelectedValue(), pl, true);
 					int res = ng.Create();
 					if(res == 1) {
 						lblMessage.setForeground(Color.GREEN);

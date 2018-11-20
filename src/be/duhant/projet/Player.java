@@ -46,4 +46,9 @@ public class Player extends User {
 	public int Create() {
 		return dao.add(this);
 	}
+	
+	public DefaultListModel<GameUser> getAllGameUser(){
+		DAOGameUser daogu = new DAOGameUser();
+		return daogu.getAll(this);
+	}
 }

@@ -23,20 +23,16 @@ public class DAOGame extends DAO<Game> {
 			String sql = "SELECT * FROM game WHERE id_game ="+ ID;
 			DAOPlatform dao = new DAOPlatform();
 			Statement stmt = super.connection();
-			if (stmt != null) {
-				ResultSet resultat = stmt.executeQuery(sql);
-				boolean tmp = resultat.next();
-				if(resultat.next()) {
-					Platform plat = dao.Find(resultat.getInt(2));
-					ga = new Game(resultat.getInt(1),plat,resultat.getInt(3),resultat.getString(4),resultat.getString(5),resultat.getString(6));
-					return ga;
-				}
-				System.out.println("Requête vide" + " " + tmp);
-				return null;
+			ResultSet resultat = stmt.executeQuery(sql);
+			if(resultat.next()) {
+				Platform plat = dao.Find(resultat.getInt(2));
+				ga = new Game(resultat.getInt(1),plat,resultat.getInt(3),resultat.getString(4),resultat.getString(5),resultat.getString(6));
+				return ga;
 			}
 			return null;
 		}
 		catch(Exception err){
+			JOptionPane.showMessageDialog(null,err.getMessage());
 			return null;
 		}
 	}
@@ -148,6 +144,17 @@ public class DAOGame extends DAO<Game> {
 		catch(Exception err) {
 			JOptionPane.showMessageDialog(null,err.getMessage());
 			return null;
+		}
+	}
+	
+	public void UpdateUnit(Game g, int newUnit) {
+		String sql = "Update Game set price = "+newUnit+"WHERE id_game ="+g.getID();
+		Statement stmt = super.connection();
+		try {
+			stmt.executeQuery(sql);
+		}
+		catch(Exception err) {
+			JOptionPane.showMessageDialog(null,err.getMessage());
 		}
 	}
 }

@@ -47,7 +47,7 @@ public class FrameAdmin extends JFrame {
 		btnAddGame.setBounds(321, 60, 298, 70);
 		contentPane.add(btnAddGame);
 		
-		JButton btnDeleteGame = new JButton("Supprimer un jeu");
+		JButton btnDeleteGame = new JButton("Modifier un jeu");
 		btnDeleteGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FrameDeleteGame fdg = new FrameDeleteGame(ad);

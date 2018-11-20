@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 public class DAOGameUser extends DAO<GameUser>{
@@ -31,7 +32,7 @@ public class DAOGameUser extends DAO<GameUser>{
 				else {
 					tmp = false;
 				}
-				gu = new GameUser(ga,pl,tmp);
+				gu = new GameUser(res.getInt(1),ga,pl,tmp);
 				return gu;
 			}
 			JOptionPane.showMessageDialog(null,"l'exemplaire recherché n'existe pas");
@@ -107,7 +108,7 @@ public class DAOGameUser extends DAO<GameUser>{
 				}
 				ga = daoG.Find(res.getInt(2));
 				pl = (Player) daoP.Find(res.getInt(3));
-				li.add(new GameUser(ga,pl,tmp));
+				li.add(new GameUser(res.getInt(1),ga,pl,tmp));
 			}
 			return li;
 		}
@@ -116,5 +117,42 @@ public class DAOGameUser extends DAO<GameUser>{
 			return null;
 		}
 	}
-
+	
+	public DefaultListModel<GameUser> getAll(Player pl){
+		DefaultListModel<GameUser> lt = new DefaultListModel<GameUser>();
+		Statement stmt = super.connection();
+		String sql = "Select * from game_copy where id_util = "+ pl.getID();
+		try {
+			ResultSet res = stmt.executeQuery(sql);
+			DAOUser daop = new DAOUser();
+			DAOGame daoG = new DAOGame();
+			while(res.next()) {
+				boolean tmp = false;
+				if(res.getInt(4) == 1) {
+					tmp = true;
+				}
+				lt.addElement(new GameUser(res.getInt(1),daoG.Find(res.getInt(2)),(Player)daop.Find(res.getInt(3)),tmp)); 
+			}
+			return lt;
+		}
+		catch(Exception err) {
+			JOptionPane.showMessageDialog(null,err.getMessage());
+			return null;
+		}
+	}
+	
+	public void changeAvailability(boolean b,GameUser g) {
+		Statement stmt = super.connection();
+		int tmp = 0;
+		if(b) {
+			tmp = 1;
+		}
+		String sql = "update game_copy set availability = "+tmp+"where id_copy = " + g.getID();
+		try {
+			stmt.executeQuery(sql);
+		}
+		catch(Exception err) {
+			JOptionPane.showMessageDialog(null,err.getMessage());
+		}
+	}
 }

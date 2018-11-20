@@ -47,5 +47,17 @@ public class FramePlayer extends JFrame {
 		btnaddGame.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnaddGame.setBounds(10, 76, 204, 66);
 		contentPane.add(btnaddGame);
+		
+		JButton btnLibrary = new JButton("Biblioth\u00E8que");
+		btnLibrary.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FrameLibrary fl = new FrameLibrary(p);
+				fl.setVisible(true);
+				dispose();
+			}
+		});
+		btnLibrary.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		btnLibrary.setBounds(405, 76, 204, 66);
+		contentPane.add(btnLibrary);
 	}
 }

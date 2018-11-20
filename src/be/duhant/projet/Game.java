@@ -66,4 +66,7 @@ public class Game {
 	static public DefaultListModel<Game> getAll(String nom,Platform plat){
 		return dao.getAll(nom, plat);
 	}
+	public void UpdatePrice(int newPrice) {
+		dao.UpdateUnit(this, newPrice);
+	}
 }		

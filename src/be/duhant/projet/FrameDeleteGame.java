@@ -18,10 +18,15 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 
 import javax.swing.border.LineBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
 
 public class FrameDeleteGame extends JFrame {
 
@@ -29,6 +34,7 @@ public class FrameDeleteGame extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 2263350082539377000L;
+	private JTextField TFPrice;
 
 	/**
 	 * Create the frame.
@@ -46,6 +52,24 @@ public class FrameDeleteGame extends JFrame {
 		list.setBorder(new LineBorder(new Color(0, 0, 0)));
 		list.setSelectedIndex(0);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		JLabel lblMessage = new JLabel("");
+		lblMessage.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		lblMessage.setBounds(409, 318, 200, 35);
+		getContentPane().add(lblMessage);
+
+		TFPrice = new JTextField();
+		TFPrice.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		TFPrice.setBounds(496, 149, 113, 35);
+		getContentPane().add(TFPrice);
+		TFPrice.setColumns(10);
+		
+		 ListSelectionListener listSelectionListener = new ListSelectionListener() {public void valueChanged(ListSelectionEvent listSelectionEvent) {
+			 TFPrice.setText(new Integer(list.getSelectedValue().getUnit()).toString());
+		 }};
+		 TFPrice.setText(new Integer(list.getSelectedValue().getUnit()).toString());
+		 list.addListSelectionListener(listSelectionListener);
+		 list.addListSelectionListener(listSelectionListener);
 		JButton btnSupprimer = new JButton("Supprimer");
 		btnSupprimer.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnSupprimer.addActionListener(new ActionListener() {
@@ -69,6 +93,28 @@ public class FrameDeleteGame extends JFrame {
 		});
 		btnRetour.setBounds(202, 342, 197, 35);
 		getContentPane().add(btnRetour);
+		
+		JButton btnNewButton = new JButton("Modifier");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					list.getSelectedValue().UpdatePrice(Integer.parseInt(TFPrice.getText()));
+					lblMessage.setForeground(Color.GREEN);
+					lblMessage.setText("Modification effectuée");
+				}
+				catch(Exception err){
+					lblMessage.setForeground(Color.RED);
+					lblMessage.setText("Prix non valide");
+				}
+				
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		btnNewButton.setBounds(496, 225, 113, 35);
+		getContentPane().add(btnNewButton);
+		
+
+		
 	
 	}
 }

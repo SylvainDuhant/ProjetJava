@@ -2,18 +2,24 @@ package be.duhant.projet;
 
 import java.util.Date;
 
+import javax.swing.DefaultListModel;
+
 	public class GameUser {
+		private int id = -1;
 		private Game ga;
 		private Player pl;
 		private  boolean available;
 		private DAOGameUser dao = new DAOGameUser();
 	
-	public GameUser(Game ga,Player pl, boolean av) {
+	public GameUser(int id,Game ga,Player pl, boolean av) {
+		this.id = id;
 		this.ga = ga;
 		this.pl = pl;
 		available = av;
 	}
-	
+	public int getID() {
+		return id;
+	}
 	public Game getGame() {
 		return ga;
 	}
@@ -29,5 +35,15 @@ import java.util.Date;
 	
 	public int Create() {
 		return dao.add(this);
+	}
+	
+	public void changeAvailability(boolean b) {
+		dao.changeAvailability(b,this);
+		this.available=b;
+	}
+	
+	@Override
+	public String toString() {
+		return ga.toString();
 	}
 }
