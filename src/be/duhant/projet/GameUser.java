@@ -30,12 +30,28 @@ package be.duhant.projet;
 	}
 	
 	public int Create() {
-		return dao.add(this);
+		int id = dao.add(this);
+		Order.getAll()
+		if(available) {
+			
+		}
+		return id;
+		
 	}
 	
 	public void changeAvailability(boolean b) {
 		dao.changeAvailability(b,this);
 		this.available=b;
+	}
+	
+	public void giveBack() {
+		available = true;
+		dao.changeAvailability(true, this);
+	}
+	
+	public void rant() {
+		available = false;
+		dao.changeAvailability(false, this);
 	}
 	
 	@Override

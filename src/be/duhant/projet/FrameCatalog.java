@@ -95,10 +95,14 @@ public class FrameCatalog extends JFrame {
 		btnOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(p.getUnit()>0) {
+					GameUser gu = ca.searchFor(list.getSelectedValue());
+					gu.getPlayer().setUnit(gu.getPlayer().getUnit()+list.getSelectedValue().getUnit());
 					if(ca.searchFor(list.getSelectedValue())!=null) { //louer le jeu maintenant
 						p.setUnit(p.getUnit()-list.getSelectedValue().getUnit());
+						
 						p.ModifyUnit(p.getUnit());
-						Order od = new Order(-1,p, list.getSelectedValue(), ca.searchFor(list.getSelectedValue()) , new Date(), new Date(), null, true);
+						Order od = new Order(-1,p, list.getSelectedValue(), gu , new Date(), new Date(), null, true);
+						gu.rant();
 						od.create();
 					}
 					else { //vouloir louer le jeu pour plus tard

@@ -16,7 +16,7 @@ public class DAOGameUser extends DAO<GameUser>{
 		Statement stmt = super.connection();
 		try {
 			GameUser gu;
-			sql = "select * from game_copy where ig_copy = " + id +")";
+			sql = "select * from game_copy where id_copy = " + id;
 			ResultSet res = stmt.executeQuery(sql);
 			if(res.next()) {
 				DAOGame daoG = new DAOGame();
@@ -33,7 +33,7 @@ public class DAOGameUser extends DAO<GameUser>{
 				gu = new GameUser(res.getInt(1),ga,pl,tmp);
 				return gu;
 			}
-			JOptionPane.showMessageDialog(null,"l'exemplaire recherché n'existe pas");
+			//JOptionPane.showMessageDialog(null,"l'exemplaire recherché n'existe pas");
 			return null;
 		}
 		catch(Exception err) {

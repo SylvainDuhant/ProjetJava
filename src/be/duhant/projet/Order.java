@@ -1,6 +1,9 @@
 package be.duhant.projet;
 
 import java.util.Date;
+import java.util.List;
+
+import javax.swing.DefaultListModel;
 
 public class Order {
 	private int ID;
@@ -11,7 +14,7 @@ public class Order {
 	private Game ga;
 	private GameUser gau = null;
 	private Player pl;
-	private DAOOrder dao = new DAOOrder();
+	private static DAOOrder dao = new DAOOrder();
 	
 	public Order(int id,Player pl, Game ga, Date registerDate, Date beginDate, Date endDate, Boolean accepted) {
 		this.ID = id;
@@ -66,4 +69,27 @@ public class Order {
 	public void create() {
 		dao.add(this);
 	}
+
+	@Override
+	public String toString() {
+		return ga.getName() + "   " + ga.getPlat();
+	}
+	
+	public static DefaultListModel<Order> getAll(Player pl) {
+		return dao.getAllOrder(pl);
+	}
+	
+	public void giveBack() {
+		if(accepted) {
+			accepted = false;
+			endDate = new Date();
+			dao.updateState(this);
+			gau.giveBack();
+		}
+	}
+	public List<Order> findOrder(Game g) {
+		return dao.findByGame(g);
+	}
+	
+	
 }

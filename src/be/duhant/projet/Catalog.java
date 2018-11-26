@@ -9,7 +9,7 @@ public class Catalog {
 	private List<GameUser> listGameUser;
 	private List<Game> listGame;
 	private static Catalog instance;
-	public Catalog() {
+	private Catalog() {
 		DAOGame daoG = new DAOGame();
 		DAOGameUser daoGU = new DAOGameUser();
 		listGameUser = daoGU.getAllGameUSer();
@@ -28,7 +28,8 @@ public class Catalog {
 		}
 		else {
 			instanciated = true;
-			return new Catalog();			
+			instance = new Catalog();
+			return instance;			
 		}
 	}
 	

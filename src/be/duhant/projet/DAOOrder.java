@@ -3,7 +3,9 @@ package be.duhant.projet;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -107,14 +109,13 @@ public class DAOOrder extends DAO<Order>{
 		DefaultListModel<Order> lt = new DefaultListModel<Order>();
 		Statement stmt = super.connection();
 		String sql = "Select * from ordr where id_util ="+pl.getID();
-		DAOUser daou = new DAOUser();
 		DAOGame daog = new DAOGame();
 		DAOGameUser daogu = new DAOGameUser();
 		
 		try {
 			ResultSet res = stmt.executeQuery(sql);
 			while(res.next()) {
-				lt.addElement(new Order(res.getInt(1),(Player)daou.Find(res.getInt(2)),daog.Find(res.getInt(3)),daogu.Find(res.getInt(4)),res.getDate(5),res.getDate(6),res.getDate(7),res.getInt(8) == 1)); 
+				lt.addElement(new Order(res.getInt(1),pl,daog.Find(res.getInt(3)),daogu.Find(res.getInt(4)),res.getDate(5),res.getDate(6),res.getDate(7),res.getInt(8) == 1));
 			}
 			return lt;
 		}
@@ -123,5 +124,29 @@ public class DAOOrder extends DAO<Order>{
 			return null;
 		}
 	}
-
+	public void updateState(Order od) {
+		 SimpleDateFormat d = new SimpleDateFormat("dd/MM/YYYY");
+		 String sql ="Update ordr set  end_date =TO_DATE('"+d.format(new Date())+"', 'DD/MM/YYYY'), is_landed = 0";
+		 Statement stmt = super.connection();
+		 try {
+			 stmt.executeQuery(sql);
+		 }
+		 catch(Exception err) {
+			 JOptionPane.showMessageDialog(null,err.getMessage());
+		 }
+	}
+	public List<Order> findByGame(Game g){
+		String sql = "select * from order where id_game = "+g.getID();
+		Statement stmt = super.connection();
+		try {
+			ResultSet res = stmt.executeQuery(sql);
+			List<Order> li = new ArrayList<Order>();
+			//ajouter à la liste
+			return li;
+		}
+		catch(Exception err) {
+			JOptionPane.showMessageDialog(null,err.getMessage());
+			return null;
+		}
+	}
 }
