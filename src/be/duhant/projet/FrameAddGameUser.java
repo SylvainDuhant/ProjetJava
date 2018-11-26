@@ -126,8 +126,7 @@ public class FrameAddGameUser extends JFrame {
 				scrollPane2.setViewportView(list2);
 				list2.setBorder(new LineBorder(new Color(0, 0, 0)));
 				list2.setSelectedIndex(0);
-				list2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);	
-					
+				list2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);						
 			}
 		});
 		btnFind.setFont(new Font("Tahoma", Font.PLAIN, 21));

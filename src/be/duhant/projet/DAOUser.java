@@ -120,7 +120,7 @@ public class DAOUser extends DAO<User>{
 		}
 	}
 	
-	public Player updateUnit(Player pl, int unit) {
+	public Player updateUnit(Player pl,int unit) {
 		String sql = "update player set unit = "+ unit + " where id_util = " + pl.getID();
 		Statement stmt = super.connection();
 		try {

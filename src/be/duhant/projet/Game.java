@@ -3,6 +3,8 @@ package be.duhant.projet;
 import javax.swing.DefaultListModel;
 
 public class Game {
+
+
 	private int ID;
 	private String name;
 	private String developers;
@@ -68,5 +70,12 @@ public class Game {
 	}
 	public void UpdatePrice(int newPrice) {
 		dao.UpdateUnit(this, newPrice);
+	}
+	
+	public boolean equals(Game g) {
+		if (name.equals(g.getName()) && plat.getplatformName().equals(g.getPlat().getplatformName()))
+			return true;
+		else
+			return false;
 	}
 }		

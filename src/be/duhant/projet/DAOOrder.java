@@ -2,7 +2,10 @@ package be.duhant.projet;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 public class DAOOrder extends DAO<Order>{
@@ -16,7 +19,7 @@ public class DAOOrder extends DAO<Order>{
 			if (stmt != null) {
 				ResultSet resultat = stmt.executeQuery(sql);
 				if(resultat.next()) {
-					id = resultat.getInt(0);
+					id = resultat.getInt(1);
 					return id;
 				}
 			}
@@ -33,8 +36,40 @@ public class DAOOrder extends DAO<Order>{
 		String sql;
 		Statement stmt = super.connection();
 		int id = getID()+1;
+		SimpleDateFormat d = new SimpleDateFormat("dd/MM/YYYY");
 		try {
-			sql = "insert into ordr values ("+id +","+obj.getPl().getID()+","+obj.getGa().getID()+","+ obj.getRegisterDate()+","+obj.getBeginDate()+","+obj.getEndDate()+","+obj.getAccepted() +")";
+			int tmpb;
+			if(obj.getAccepted()) {
+				tmpb = 1;
+			}
+			else {
+				tmpb = 0;
+			}
+			//sql = "insert into ordr values ("+id +","+obj.getPl().getID()+","+obj.getGa().getID()+","+ obj.getGau().getID() +","
+			//+"TO_DATE('"+ d.format(obj.getRegisterDate())+"','DD/MM/YYYY'), TO_DATE('"+ d.format(obj.getBeginDate())+"','DD/MM/YYYY'), TO_DATE('"+ d.format(obj.getEndDate())+"','DD/MM/YYYY'),"+tmpb +")";
+			
+			
+			sql = "insert into ordr values (" + id +","+obj.getPl().getID()+","+obj.getGa().getID()+",";
+			if(obj.getGau() != null) {
+				sql = sql+obj.getGau().getID()+",";
+			}
+			else {
+				sql = sql+"null,";
+			}
+			sql = sql + "TO_DATE('"+ d.format(obj.getRegisterDate())+"','DD/MM/YYYY'),";
+			if(obj.getBeginDate() != null) {
+				sql = sql + "TO_DATE('"+ d.format(obj.getBeginDate())+"','DD/MM/YYYY'),";
+			}
+			else {
+				sql = sql+"null,";
+			}
+			if(obj.getEndDate() != null) {
+				sql = sql + "TO_DATE('"+ d.format(obj.getEndDate())+"','DD/MM/YYYY'),";
+			}
+			else {
+				sql = sql+"null,";
+			}
+			sql = sql+tmpb+")";
 			stmt.executeQuery(sql);
 			return 1;
 		}
@@ -57,7 +92,7 @@ public class DAOOrder extends DAO<Order>{
 				DAOGame daoG = new DAOGame();
 				Player pa = (Player) daoP.Find(res.getInt(2));
 				Game ga = daoG.Find(res.getInt(3));
-				Order od = new Order(pa,ga,res.getDate(4),res.getDate(5),res.getDate(6),res.getInt(7) == 1); //pas de boolean dans sql developper 
+				Order od = new Order(res.getInt(1),pa,ga,res.getDate(4),res.getDate(5),res.getDate(6),res.getInt(7) == 1); //pas de boolean dans sql developper 
 				return od;
 			}	
 			return null;
@@ -67,6 +102,26 @@ public class DAOOrder extends DAO<Order>{
 			return null;
 		}
 		
+	}
+	public DefaultListModel<Order> getAllOrder(Player pl){
+		DefaultListModel<Order> lt = new DefaultListModel<Order>();
+		Statement stmt = super.connection();
+		String sql = "Select * from ordr where id_util ="+pl.getID();
+		DAOUser daou = new DAOUser();
+		DAOGame daog = new DAOGame();
+		DAOGameUser daogu = new DAOGameUser();
+		
+		try {
+			ResultSet res = stmt.executeQuery(sql);
+			while(res.next()) {
+				lt.addElement(new Order(res.getInt(1),(Player)daou.Find(res.getInt(2)),daog.Find(res.getInt(3)),daogu.Find(res.getInt(4)),res.getDate(5),res.getDate(6),res.getDate(7),res.getInt(8) == 1)); 
+			}
+			return lt;
+		}
+		catch(Exception err) {
+			JOptionPane.showMessageDialog(null,err.getMessage());
+			return null;
+		}
 	}
 
 }

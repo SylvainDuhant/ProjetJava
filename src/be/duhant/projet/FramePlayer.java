@@ -60,5 +60,29 @@ public class FramePlayer extends JFrame {
 		btnLibrary.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnLibrary.setBounds(405, 76, 204, 66);
 		contentPane.add(btnLibrary);
+		
+		JButton btnMyOrders = new JButton("Mes commandes");
+		btnMyOrders.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				FrameMyOrders fmo = new FrameMyOrders(p);
+				fmo.setVisible(true);
+				dispose();
+			}
+		});
+		btnMyOrders.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		btnMyOrders.setBounds(10, 178, 204, 66);
+		contentPane.add(btnMyOrders);
+		
+		JButton btnCatalog = new JButton("Catalogue");
+		btnCatalog.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				FrameCatalog f = new FrameCatalog(p);
+				f.setVisible(true);
+				dispose();
+			}
+		});
+		btnCatalog.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		btnCatalog.setBounds(405, 178, 204, 66);
+		contentPane.add(btnCatalog);
 	}
 }

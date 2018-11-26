@@ -93,7 +93,7 @@ public class DAOGameUser extends DAO<GameUser>{
 			DAOUser daoP = new DAOUser();
 			Player pl;
 			Statement stmt = super.connection();
-			String sql = "select * from game_copy";
+			String sql = "select * from game_copy where AVAILABILITY = 1";
 			ResultSet res = stmt.executeQuery(sql);
 			while(res.next()) {
 				boolean tmp;
