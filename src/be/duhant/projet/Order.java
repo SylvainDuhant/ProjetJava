@@ -83,12 +83,15 @@ public class Order {
 		if(accepted) {
 			accepted = false;
 			endDate = new Date();
-			dao.updateState(this);
 			gau.giveBack();
 		}
 	}
 	public List<Order> findOrder(Game g) {
 		return dao.findByGame(g);
+	}
+	
+	public static List<Order>getAll(){
+		return dao.getAllOrder();
 	}
 	
 	

@@ -124,6 +124,27 @@ public class DAOOrder extends DAO<Order>{
 			return null;
 		}
 	}
+	
+	public List<Order> getAllOrder(){
+		List<Order> lt = new ArrayList<Order>();
+		Statement stmt = super.connection();
+		String sql = "Select * from ordr";
+		DAOGame daog = new DAOGame();
+		DAOUser daou = new DAOUser();
+		DAOGameUser daogu = new DAOGameUser();
+		
+		try {
+			ResultSet res = stmt.executeQuery(sql);
+			while(res.next()) {
+				lt.add(new Order(res.getInt(1),(Player)daou.Find(res.getInt(2)),daog.Find(res.getInt(3)),daogu.Find(res.getInt(4)),res.getDate(5),res.getDate(6),res.getDate(7),res.getInt(8) == 1));
+			}
+			return lt;
+		}
+		catch(Exception err) {
+			JOptionPane.showMessageDialog(null,err.getMessage());
+			return null;
+		}
+	}
 	public void updateState(Order od) {
 		 SimpleDateFormat d = new SimpleDateFormat("dd/MM/YYYY");
 		 String sql ="Update ordr set  end_date =TO_DATE('"+d.format(new Date())+"', 'DD/MM/YYYY'), is_landed = 0";

@@ -1,6 +1,10 @@
 package be.duhant.projet;
 
-	public class GameUser {
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
+public class GameUser {
 		private int id = -1;
 		private Game ga;
 		private Player pl;
@@ -31,9 +35,15 @@ package be.duhant.projet;
 	
 	public int Create() {
 		int id = dao.add(this);
-		Order.getAll()
+		List<Order> lt = Order.getAll();
+		Iterator<Order> it = lt.iterator();
 		if(available) {
-			
+			while(it.hasNext()) {
+				if(it.next().getGa().equals(ga)){
+					available = false;
+					//le reste pour le cas d'une commande sur un jeu pas dispo
+				}
+			}
 		}
 		return id;
 		
