@@ -56,11 +56,6 @@ public class FrameLibrary extends JFrame {
 		list.setBorder(new LineBorder(new Color(0, 0, 0)));
 		list.setSelectedIndex(0);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list.addListSelectionListener(new ListSelectionListener() {public void valueChanged(ListSelectionEvent listSelectionEvent) {
-			chckbxAvailable.setSelected(list.getSelectedValue().getAvailability());
-		 }});
-		chckbxAvailable.setSelected(list.getSelectedValue().getAvailability());
-		
 		JButton btnUpdate = new JButton("Valider");
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -68,10 +63,17 @@ public class FrameLibrary extends JFrame {
 				lblMess.setText("Modification sauvegardée");
 			}
 		});
+		list.addListSelectionListener(new ListSelectionListener() {public void valueChanged(ListSelectionEvent listSelectionEvent) {
+			chckbxAvailable.setSelected(list.getSelectedValue().getAvailability());
+			btnUpdate.setEnabled(!Order.findByGameUser(list.getSelectedValue()));
+		 }});
+		btnUpdate.setEnabled(!Order.findByGameUser(list.getSelectedValue()));
+		chckbxAvailable.setSelected(list.getSelectedValue().getAvailability());
+		
+		
 		btnUpdate.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnUpdate.setBounds(480, 115, 113, 46);
 		contentPane.add(btnUpdate);
-		
 		JButton btnBack = new JButton("Retour");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

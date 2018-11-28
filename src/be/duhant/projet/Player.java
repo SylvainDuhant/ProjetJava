@@ -5,11 +5,10 @@ import java.util.Date;
 import javax.swing.DefaultListModel;
 
 public class Player extends User {
-	@Override
-	public String toString() {
-		return super.getLogin() ;
-	}
+
 	private int unit;
+	private Date registerDate;
+	
 	public int getUnit() {
 		return unit;
 	}
@@ -22,14 +21,10 @@ public class Player extends User {
 	public void setRegisterDate(Date registerDate) {
 		this.registerDate = registerDate;
 	}
-	private Date registerDate;
 	public Player(int id, String password,String login, String email, String address, Date birthday, int unit, Date registerDate ) {
 		super(id,password,login, email ,address ,birthday);
 		this.unit = unit;
 		this.registerDate = registerDate;
-	}
-	public void RayerJoueur() {
-		//appel DAO
 	}
 	
 	public Player ModifyUnit(int newUnit) {
@@ -38,10 +33,11 @@ public class Player extends User {
 	
 	public void delete() {
 			dao.deletePlayer(this);
-		}
+	}
 	public static DefaultListModel<Player> getALL(){
 		return dao.getAll();
 	}
+	
 	public int Create() {
 		return dao.add(this);
 	}
@@ -49,5 +45,10 @@ public class Player extends User {
 	public DefaultListModel<GameUser> getAllGameUser(){
 		DAOGameUser daogu = new DAOGameUser();
 		return daogu.getAll(this);
+	}
+	
+	@Override
+	public String toString() {
+		return super.getLogin() ;
 	}
 }

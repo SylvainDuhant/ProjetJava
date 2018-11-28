@@ -3,6 +3,8 @@ package be.duhant.projet;
 import java.sql.Connection;
 import java.sql.Statement;
 
+import javax.swing.JOptionPane;
+
 import oracle.jdbc.pool.OracleDataSource;
 
 public abstract class DAO<T> {
@@ -16,12 +18,11 @@ public abstract class DAO<T> {
 		    ods.setUser("ORA26");
 		    ods.setPassword("b");
 		    Connection co = ods.getConnection();
-		    Statement stmt = co.createStatement();
-		    return stmt;
-		}
-		catch(Exception err){
-			System.out.println(err);
+		    return co.createStatement();
+		}catch(Exception err) {
+			JOptionPane.showMessageDialog(null,err);
 			return null;
 		}
+		
 	}
 }

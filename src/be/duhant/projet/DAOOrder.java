@@ -94,7 +94,8 @@ public class DAOOrder extends DAO<Order>{
 				DAOGame daoG = new DAOGame();
 				Player pa = (Player) daoP.Find(res.getInt(2));
 				Game ga = daoG.Find(res.getInt(3));
-				Order od = new Order(res.getInt(1),pa,ga,res.getDate(4),res.getDate(5),res.getDate(6),res.getInt(7) == 1); //pas de boolean dans sql developper 
+				Order od = new Order(res.getInt(1),pa,ga,res.getDate(4),res.getDate(5),res.getDate(6),res.getInt(7) == 1); //pas de boolean dans sql developper
+				 
 				return od;
 			}	
 			return null;
@@ -117,6 +118,7 @@ public class DAOOrder extends DAO<Order>{
 			while(res.next()) {
 				lt.addElement(new Order(res.getInt(1),pl,daog.Find(res.getInt(3)),daogu.Find(res.getInt(4)),res.getDate(5),res.getDate(6),res.getDate(7),res.getInt(8) == 1));
 			}
+			 
 			return lt;
 		}
 		catch(Exception err) {
@@ -138,6 +140,7 @@ public class DAOOrder extends DAO<Order>{
 			while(res.next()) {
 				lt.add(new Order(res.getInt(1),(Player)daou.Find(res.getInt(2)),daog.Find(res.getInt(3)),daogu.Find(res.getInt(4)),res.getDate(5),res.getDate(6),res.getDate(7),res.getInt(8) == 1));
 			}
+			 
 			return lt;
 		}
 		catch(Exception err) {
@@ -151,23 +154,62 @@ public class DAOOrder extends DAO<Order>{
 		 Statement stmt = super.connection();
 		 try {
 			 stmt.executeQuery(sql);
+			  
 		 }
 		 catch(Exception err) {
 			 JOptionPane.showMessageDialog(null,err.getMessage());
 		 }
 	}
 	public List<Order> findByGame(Game g){
-		String sql = "select * from order where id_game = "+g.getID();
+		String sql = "select * from ordr where id_game = "+g.getID() + "and begin_date is null";
 		Statement stmt = super.connection();
 		try {
 			ResultSet res = stmt.executeQuery(sql);
 			List<Order> li = new ArrayList<Order>();
-			//ajouter à la liste
+			DAOUser daou = new DAOUser();
+			DAOGame daog = new DAOGame();
+			while(res.next()) {
+				boolean tmp = res.getInt(8) == 1;
+				li.add(new Order(res.getInt(1),(Player)daou.Find(res.getInt(2)),daog.Find(res.getInt(3)),res.getDate(5),res.getDate(6),res.getDate(7),tmp));
+			}
+			 
 			return li;
 		}
 		catch(Exception err) {
 			JOptionPane.showMessageDialog(null,err.getMessage());
 			return null;
+		}
+	}
+
+	public void updateOrder(Order order,GameUser gu) {
+		 SimpleDateFormat d = new SimpleDateFormat("dd/MM/YYYY");
+		String sql = "update ordr set id_game_copy ="+gu.getID()+", begin_date =TO_DATE('"+d.format(new Date())+"', 'DD/MM/YYYY'), is_landed = 1 where id_ordr="+order.getID();
+		Statement stmt = super.connection();
+		try {
+			stmt.executeQuery(sql);
+			DAOUser daou = new DAOUser();
+			daou.UpdateUnitOrder(order, gu);
+		}
+		catch(Exception err) {
+			JOptionPane.showMessageDialog(null,err.getMessage());
+		}
+		
+	}
+	public boolean findByGameUser(GameUser gu) {
+		Statement stmt = super.connection();
+		String sql = "select id_game_copy from ordr where id_game_copy ="+gu.getID() +"and end_date is null";
+		try {
+			ResultSet res = stmt.executeQuery(sql);
+			if(res.next()) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		catch(Exception err) {
+			JOptionPane.showMessageDialog(null,err.getMessage());
+			return false;
 		}
 	}
 }

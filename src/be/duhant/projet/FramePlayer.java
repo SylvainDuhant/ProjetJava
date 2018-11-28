@@ -32,7 +32,7 @@ public class FramePlayer extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblTitre = new JLabel("Bienvenue " + p.getLogin());
+		JLabel lblTitre = new JLabel("Bienvenue " + p.getLogin() + " vous avez " + p.getUnit() + " unités");
 		lblTitre.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		lblTitre.setBounds(117, 11, 502, 54);
 		contentPane.add(lblTitre);

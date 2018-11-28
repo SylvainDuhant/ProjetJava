@@ -12,7 +12,7 @@ public class DAOPlatform extends DAO<Platform>{
 	public Platform Find(int ID) {
 		try {
 			Platform plat;
-			String sql = "SELECT id_console, name, release_date FROM console WHERE id_console = "+ ID;
+			String sql = "SELECT * FROM console WHERE id_console = "+ ID;
 		    Statement stmt = super.connection();
 			ResultSet resultat = stmt.executeQuery(sql);
 			if(resultat.next()) {

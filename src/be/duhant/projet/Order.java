@@ -84,9 +84,10 @@ public class Order {
 			accepted = false;
 			endDate = new Date();
 			gau.giveBack();
+			dao.updateState(this);
 		}
 	}
-	public List<Order> findOrder(Game g) {
+	public static List<Order> findOrder(Game g) {
 		return dao.findByGame(g);
 	}
 	
@@ -94,5 +95,10 @@ public class Order {
 		return dao.getAllOrder();
 	}
 	
-	
+	public void UpdateOrder(GameUser gu) {
+		dao.updateOrder(this,gu);
+	}
+	public static boolean findByGameUser(GameUser gu) {
+		return dao.findByGameUser(gu);
+	}
 }

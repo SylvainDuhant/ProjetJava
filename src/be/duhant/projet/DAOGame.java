@@ -1,5 +1,6 @@
 package be.duhant.projet;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -7,6 +8,8 @@ import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+
+import oracle.jdbc.pool.OracleDataSource;
 
 public class DAOGame extends DAO<Game> {
 	
@@ -103,12 +106,13 @@ public class DAOGame extends DAO<Game> {
 	public DefaultListModel<Game> getAll(){
 		DefaultListModel<Game> lt = new DefaultListModel<Game>();
 		Statement stmt = super.connection();
-		String sql = "Select * from game";
+		String sql = "select * from game";
 		DAOPlatform daop = new DAOPlatform();
 		try {
 			ResultSet res = stmt.executeQuery(sql);
 			while(res.next()) {
-				lt.addElement(new Game(res.getInt(1), daop.Find(res.getInt(2)), res.getInt(3),res.getString(4),res.getString(5),res.getString(6))); 
+				lt.addElement(new Game(res.getInt(1), daop.Find(res.getInt(2)), res.getInt(3),res.getString(4),res.getString(5),res.getString(6)));
+				
 			}
 			return lt;
 		}

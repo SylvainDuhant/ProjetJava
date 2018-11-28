@@ -18,6 +18,7 @@ public class DAOUser extends DAO<User>{
 			ResultSet res = stmt.executeQuery(sql);
 			if(res.next()) {
 				u = new Admin(res.getInt(1), res.getString(2), res.getString(3), res.getString(4),res.getString(5),res.getDate(6));
+				 
 				return u;
 			}
 			else {
@@ -25,10 +26,13 @@ public class DAOUser extends DAO<User>{
 				res = stmt.executeQuery(sql);
 				if(res.next()) {
 					u = new Player(res.getInt(1), res.getString(2), res.getString(3), res.getString(4),res.getString(5),res.getDate(6),res.getInt(8),res.getDate(9));
+					 
 					return u;
 				}
+				 
 				return null;
 			}
+			
 		}
 		catch(Exception err) {
 			JOptionPane.showMessageDialog(null,err.getMessage());
@@ -51,12 +55,14 @@ public class DAOUser extends DAO<User>{
 					Player tmp = (Player) obj;
 					sql = "INSERT INTO player VALUES ("+id+","+tmp.getUnit()+",TO_DATE('"+ d.format(tmp.getRegisterDate()) +"', 'DD/MM/YYYY'))";
 					stmt.executeQuery(sql);
+					 
 					return id;
 				}
 				else {
 					sql =  "INSERT INTO admini values("+id+")";
 				}
 			}
+				 
 				return -1;
 		}
 		catch(Exception err) {
@@ -73,8 +79,10 @@ public class DAOUser extends DAO<User>{
 		try {
 			ResultSet res = stmt.executeQuery(sql);
 			if(res.next()) {
+				 
 				return res.getInt(1);
 			}
+			 
 			return -1;
 		}
 		catch(Exception err){
@@ -91,9 +99,11 @@ public class DAOUser extends DAO<User>{
 		try {
 			ResultSet res = stmt.executeQuery(sql);
 			if(res.next()) {
+				 
 				return res.getInt(1);
 			}
 			else {
+				 
 				return -1;
 			}
 		}
@@ -112,6 +122,7 @@ public class DAOUser extends DAO<User>{
 			while(res.next()) {
 				list.addElement(new Player(res.getInt(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getDate(6),res.getInt(8),res.getDate(9)));
 			}
+			 
 			return list;
 		}
 		catch(Exception err){
@@ -126,6 +137,7 @@ public class DAOUser extends DAO<User>{
 		try {
 			stmt.executeQuery(sql);
 			pl.setUnit(unit);
+			 
 			return pl;
 		}
 		catch(Exception err){
@@ -141,13 +153,24 @@ public class DAOUser extends DAO<User>{
 			stmt.executeQuery(sql);
 			sql = "delete util where id_util = " + pl.getID();
 			stmt.executeQuery(sql);
+			 
 			return 1;
 		}
 		catch(Exception err){
 			JOptionPane.showMessageDialog(null,err.getMessage());
 			return -2;
 		}
-		
+	}
+	public void UpdateUnitOrder(Order od, GameUser gu) {
+		String sql1 = "Update player set unit = "+ (gu.getPlayer().getUnit() + gu.getGame().getUnit()) + "where id_util = " +gu.getPlayer().getID() ;
+		String sql2 = "Update player set unit =" + (od.getPl().getUnit() - gu.getGame().getUnit()) + "where id_util = " + od.getPl().getID();
+		try {
+			Statement stmt = super.connection();
+			stmt.executeQuery(sql1);
+			stmt.executeQuery(sql2);
+		}catch(Exception err) {
+			JOptionPane.showMessageDialog(null,err.getMessage());
+		}
 	}
 
 }

@@ -33,7 +33,6 @@ public class DAOGameUser extends DAO<GameUser>{
 				gu = new GameUser(res.getInt(1),ga,pl,tmp);
 				return gu;
 			}
-			//JOptionPane.showMessageDialog(null,"l'exemplaire recherché n'existe pas");
 			return null;
 		}
 		catch(Exception err) {
@@ -56,7 +55,8 @@ public class DAOGameUser extends DAO<GameUser>{
 		Statement stmt = super.connection();
 		try {
 			stmt.executeQuery(sql);
-			return 1;
+			 
+			return id;
 		}
 		catch(Exception err) {
 			JOptionPane.showMessageDialog(null,err.getMessage());
@@ -74,10 +74,13 @@ public class DAOGameUser extends DAO<GameUser>{
 				ResultSet resultat = stmt.executeQuery(sql);
 				if(resultat.next()) {
 					id = resultat.getInt(1);
+					 
 					return id;
 				}
+				 
 				return 0;
 			}
+			 
 			return -1;
 		}
 		catch(Exception err){
@@ -107,6 +110,7 @@ public class DAOGameUser extends DAO<GameUser>{
 				pl = (Player) daoP.Find(res.getInt(3));
 				li.add(new GameUser(res.getInt(1),ga,pl,tmp));
 			}
+			 
 			return li;
 		}
 		catch(Exception err) {
@@ -130,6 +134,7 @@ public class DAOGameUser extends DAO<GameUser>{
 				}
 				lt.addElement(new GameUser(res.getInt(1),daoG.Find(res.getInt(2)),(Player)daop.Find(res.getInt(3)),tmp)); 
 			}
+			 
 			return lt;
 		}
 		catch(Exception err) {
@@ -147,6 +152,8 @@ public class DAOGameUser extends DAO<GameUser>{
 		String sql = "update game_copy set availability = "+tmp+"where id_copy = " + g.getID();
 		try {
 			stmt.executeQuery(sql);
+			stmt.close();
+			 
 		}
 		catch(Exception err) {
 			JOptionPane.showMessageDialog(null,err.getMessage());

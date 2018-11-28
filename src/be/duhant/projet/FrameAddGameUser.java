@@ -84,7 +84,7 @@ public class FrameAddGameUser extends JFrame {
 				if(displayed){
 					GameUser ng = new GameUser(-1,list2.getSelectedValue(), pl, true);
 					int res = ng.Create();
-					if(res == 1) {
+					if(res > 0) {
 						lblMessage.setForeground(Color.GREEN);
 						lblMessage.setText("Ajouté !");
 					}
