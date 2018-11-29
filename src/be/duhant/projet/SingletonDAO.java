@@ -55,4 +55,14 @@ public class SingletonDAO {
 	public Statement getStatement() {
 		return stmt;
 	}
+	protected void finalize() {
+		try {
+			stmt.close();
+			co.close();
+		} catch (Exception err) {
+			JOptionPane.showMessageDialog(null,err);
+		}
+		
+		
+	}
 }
